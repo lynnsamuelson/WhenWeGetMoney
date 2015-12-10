@@ -11,10 +11,16 @@ namespace WhenWeGetMoney.Models
 
         [Key]
         public int FamilyUserID { get; set; }
+        public string FamilyName { get; set; }
         public int TypeOfFamily { get; set; }
 
+        public List<Wish> Wishes { get; set; }
+        public MoneyPot money { get; set; }
 
-      
+           
+
+
+
 
     }
 }
