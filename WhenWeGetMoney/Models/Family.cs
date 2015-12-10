@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WhenWeGetMoney.Models
 {
-    public class Family
+    public class Family 
     {
 
         [Key]

@@ -32,5 +32,11 @@ namespace WhenWeGetMoney.Models
             var query = from Wishes in _context.Wishes select Wishes;
             return query.ToList();
         }
+
+        public List<MoneyPot> GetAllMoneyPots()
+        {
+            var query = from MoneyPot in _context.MoneyPots select MoneyPot;
+            return query.ToList();
+        }
     }
 }
