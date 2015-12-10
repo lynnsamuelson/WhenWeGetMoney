@@ -8,10 +8,10 @@ namespace WhenWeGetMoney.Models
 {
     public class MoneyPot
     {
-       // public virtual Family FundsAvailable { get; set; }
-        //public decimal DollarAmount { get; set; }
+        public virtual Family FundsAvailable { get; set; }
+        public decimal DollarAmount { get; set; }
         [key]
         public int MoneyPotId { get; set; }
-        //public DateTime DateUpdated { get; set; }
+        public DateTime DateUpdated { get; set; }
     }
 }

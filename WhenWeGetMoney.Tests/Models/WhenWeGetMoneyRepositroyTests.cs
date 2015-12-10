@@ -107,7 +107,132 @@ namespace WhenWeGetMoney.Tests.Models
             CollectionAssert.AreEqual(expected, actual);
         }
 
-       [TestMethod]
+        [TestMethod]
+        public void WhenWeGetmoneyEnsureICanGetFamilyByName()
+        {
+            //Arrange
+            var expected = new List<Family>
+            {
+                new Family {FamilyName = "Rice" },
+                new Family {FamilyName = "Wade" }
+            };
+            mock_family_set.Object.AddRange(expected);
+            ConnectMocksToDataStore(expected);
+
+            //Act
+            string FamilyName = "Rice";
+            Family actual_user = repository.GetFamilyByName(FamilyName);
+            //Assert
+            Assert.AreEqual("Rice", actual_user.FamilyName);
+        }
+
+        [TestMethod]
+        public void WhenWeGetUserByNameDoesNotExist()
+        {
+            //Arrange
+            var expected = new List<Family>
+            {
+                new Family {FamilyName = "Rice" },
+                new Family {FamilyName = "Wade" }
+            };
+            mock_family_set.Object.AddRange(expected);
+            ConnectMocksToDataStore(expected);
+            // Act
+            string FamilyName = "bogus";
+            Family actual_user = repository.GetFamilyByName(FamilyName);
+            // Assert
+            Assert.IsNull(actual_user);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void WhenWeGetMoneyFamilyNameFailsMultipleFamilyNames()
+        {
+            //Arrange
+            var expected = new List<Family>
+            {
+                new Family {FamilyName = "Rice" },
+                new Family {FamilyName = "Rice" }
+            };
+            mock_family_set.Object.AddRange(expected);
+            ConnectMocksToDataStore(expected);
+            // Act
+            string FamilyName = "Rice";
+            Family actual_user = repository.GetFamilyByName(FamilyName);
+        }
+
+        [TestMethod]
+        public void WhenWeGetMoneyEnsureFamileyNameIsAvailable()
+        {
+            //Arrange
+            var expected = new List<Family>
+            {
+                new Family {FamilyName = "Rice" },
+                new Family {FamilyName = "Wade" }
+            };
+            mock_family_set.Object.AddRange(expected);
+            ConnectMocksToDataStore(expected);
+            // Act
+            string name = "bogus";
+            bool is_available = repository.IsFamilyNameAvailable(name);
+            // Assert
+            Assert.IsTrue(is_available);
+        }
+
+        [TestMethod]
+        public void WhenWeGetMoneyEnsureFamilyNameIsNotAvailable()
+        {
+            //Arrange
+            var expected = new List<Family>
+            {
+                new Family {FamilyName = "Rice" },
+                new Family {FamilyName = "Wade" }
+            };
+            mock_family_set.Object.AddRange(expected);
+            ConnectMocksToDataStore(expected);
+            // Act
+            string name = "Rice";
+            bool is_available = repository.IsFamilyNameAvailable(name);
+            // Assert
+            Assert.IsFalse(is_available);
+        }
+
+        [TestMethod]
+        public void WhenWeGetMoneyEnsureICanSearchByName()
+        {
+            //Arrange
+            var expected = new List<Family>
+            {
+                new Family {FamilyName = "Rice", TypeOfFamily = 4, FamilyUserID = 8 },
+                new Family {FamilyName = "Samuelson", TypeOfFamily = 2, FamilyUserID = 6 },
+                new Family {FamilyName = "Olson", TypeOfFamily = 1, FamilyUserID = 9 },
+                new Family {FamilyName = "Sonson", TypeOfFamily = 2, FamilyUserID = 7 },
+                new Family {FamilyName = "Sharsonville", TypeOfFamily = 2, FamilyUserID = 6 }
+
+
+
+            };
+            mock_family_set.Object.AddRange(expected);
+            ConnectMocksToDataStore(expected);
+            // Act
+            string search_term = "son";
+            List<Family> expected_users = new List<Family>
+            {
+                new Family {FamilyName = "Olson", TypeOfFamily = 1, FamilyUserID = 9 },
+                new Family {FamilyName = "Samuelson", TypeOfFamily = 2, FamilyUserID = 6 },
+                new Family {FamilyName = "Sharsonville", TypeOfFamily = 2, FamilyUserID = 6 },
+                new Family {FamilyName = "Sonson", TypeOfFamily = 2, FamilyUserID = 7 }
+            };
+
+            List<Family> actual_users = repository.SearchByName(search_term);
+
+            // Assert
+            Assert.AreEqual(expected_users[0].FamilyName, actual_users[0].FamilyName);
+            Assert.AreEqual(expected_users[1].FamilyName, actual_users[1].FamilyName);
+            Assert.AreEqual(expected_users[2].FamilyName, actual_users[2].FamilyName);
+        }
+
+        [TestMethod]
        public void WhenWeGetMoneyEnsureIHaveAContext()
         {
             // Arrange
@@ -116,8 +241,6 @@ namespace WhenWeGetMoney.Tests.Models
             // Assert
             Assert.IsInstanceOfType(actual, typeof(WhenWeGetMoneyContext));
         }
-
-
 
     [TestMethod]
         public void WhenWeGetMoneyEnsureICanGetAllWishes()
@@ -140,6 +263,25 @@ namespace WhenWeGetMoney.Tests.Models
         }
 
         [TestMethod]
+        public void WhenWeGetMoneyEnsureICanCreaeAWish()
+        {
+            // Arrange
+            DateTime base_time = DateTime.Now;
+            List<Wish> expected_wishes = new List<Wish>(); // This is our database
+            ConnectMocksToDataStore(expected_wishes);
+            Family Family1 = new Family { FamilyName = "Rice" };
+            string content = "Spring Training";
+            mock_wish_set.Setup(j => j.Add(It.IsAny<Wish>())).Callback((Wish s) => expected_wishes.Add(s));
+            // Act
+            bool successful = repository.CreateWish(Family1, content);
+
+            // Assert
+            Assert.AreEqual(1, repository.GetAllWishes().Count);
+            // Should this return true?
+            //Assert.IsTrue(successful);
+        }
+
+        [TestMethod]
         public void WhenWeGetMoneyEnsureICanGetAllMoneyPots()
         {
             //Arrange
@@ -157,6 +299,24 @@ namespace WhenWeGetMoney.Tests.Models
             //Assert
             Assert.AreEqual(1, actual.First().MoneyPotId);
             CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void WhenWeGetMoneyEnsureICanCreateAMoneyPot()
+        {
+            // Arrange
+            DateTime base_time = DateTime.Now;
+            List<MoneyPot> expected_money = new List<MoneyPot>(); // This is our database
+            ConnectMocksToDataStore(expected_money);
+            Family Family1 = new Family { FamilyName = "Rice" };
+            decimal dollarAmount = 1001.75m;
+            mock_moneyPot_set.Setup(j => j.Add(It.IsAny<MoneyPot>())).Callback((MoneyPot s) => expected_money.Add(s));
+            // Act
+            bool successful = repository.CreateMoneyPot(Family1, dollarAmount);
+
+            // Assert
+            Assert.AreEqual(1, repository.GetAllMoneyPots().Count);
+
         }
 
 

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WhenWeGetMoney.Models
 {
-    public class Family 
+    public class Family : IComparable
     {
 
         [Key]
@@ -17,10 +17,11 @@ namespace WhenWeGetMoney.Models
         public List<Wish> Wishes { get; set; }
         public MoneyPot money { get; set; }
 
-           
-
-
-
-
+        public int CompareTo(object obj)
+        {
+            Family other_family = obj as Family;
+            int answer = this.FamilyName.CompareTo(other_family.FamilyName);
+            return answer;
+        }
     }
 }
