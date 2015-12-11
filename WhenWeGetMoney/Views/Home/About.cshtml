@@ -1,7 +1,17 @@
-﻿@{
+﻿@model IEnumerable<string>
+@{
     ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+<ul>
+        @foreach (var item in Model) //if you make your own type need to case with as IEnumberable
+
+            {
+                <li>@item </li>
+            }
+    
+</ul>

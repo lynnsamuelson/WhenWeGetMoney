@@ -1,0 +1,26 @@
+﻿body {
+    background-color: #6F6F72;
+}
+
+.right {
+    float: right;
+}
+
+
+.green {
+    border: 1px solid green;
+}
+
+.red {
+    border: 1px solid red;
+}
+
+.mainlist {
+    background-color: #B9B9BF;
+    margin: 0px;  
+    min-height: 100px;
+    max-width: 95%; 
+    border-radius: 4px; 
+    padding: 0px;
+    border: 1px solid rgba(111,113,114, 0.4);
+}

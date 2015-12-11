@@ -8,7 +8,7 @@ namespace WhenWeGetMoney.Models
 {
     public class Wish
     {
-        public object Author { get; set; }
+        public virtual object Author { get; set; }
         [MaxLength(75)]
         [MinLength(3)]
         public string Content { get; set; }
