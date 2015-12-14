@@ -15,12 +15,32 @@
     border: 1px solid red;
 }
 
-.mainlist {
+.mainStyle {
     background-color: #B9B9BF;
-    margin: 0px;  
-    min-height: 100px;
-    max-width: 95%; 
-    border-radius: 4px; 
-    padding: 0px;
     border: 1px solid rgba(111,113,114, 0.4);
+    text-align: center;
+    min-height: 100px;
+    margin-top: 10px;  
+    border-radius: 4px; 
+
 }
+
+.mainlist {
+    max-width: 90%;
+    padding: 0px;
+
+}
+.boughtIt {
+    margin: 2px, 2px, 2px, 2px; 
+    padding: 5px;
+}
+
+.moneyPot {
+    margin: 2px, 2px, 2px, 2px; 
+    padding: 5px;
+}
+
+.suggestions {
+    margin: 2px, 2px, 2px, 2px; 
+    padding: 5px;
+ }
