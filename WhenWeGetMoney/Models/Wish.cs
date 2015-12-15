@@ -8,9 +8,9 @@ namespace WhenWeGetMoney.Models
 {
     public class Wish
     {
-        public virtual object Author { get; set; }
+        public virtual Family Author { get; set; }
         [MaxLength(75)]
-        [MinLength(3)]
+        [MinLength(1)]
         public string Content { get; set; }
         public DateTime Date { get; set; }
         [key]
