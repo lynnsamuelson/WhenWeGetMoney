@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\TestControllerTests.cs" />
+    <Compile Include="Controllers\WishControllerTests.cs" />
     <Compile Include="Models\FamilyTests.cs" />
     <Compile Include="Models\MoneyPotTests.cs" />
     <Compile Include="Models\WhenWeGetMoneyRepositroyTests.cs" />

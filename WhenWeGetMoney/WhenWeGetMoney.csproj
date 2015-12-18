@@ -189,6 +189,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\WhenWeGetMoneyController.cs" />
+    <Compile Include="Controllers\WishController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1085,7 +1086,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50324</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -50,6 +50,19 @@ namespace WhenWeGetMoney.Models
             return query.SingleOrDefault();
         }
 
+        public Family GetFamilyById(int FamilyUserID)
+        {
+            var query = from u in _context.Families where u.FamilyUserID == FamilyUserID select u;
+            return query.SingleOrDefault();
+        }
+
+        public List<Wish> GetFamilyWishes(Family user)
+        {
+            var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
+            Family found_user = query.Single<Family>();
+            return found_user.Wishes.ToList();
+        }
+
         public bool IsFamilyNameAvailable(string name)
         {
             bool available = false;

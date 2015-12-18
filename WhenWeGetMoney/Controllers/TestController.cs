@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -6,29 +7,43 @@ using System.Net.Http;
 using System.Web.Http;
 using WhenWeGetMoney.Models;
 
+
 namespace WhenWeGetMoney.Controllers
 {
     public class TestController : ApiController
     {
         
-
         public WhenWeGetMoneyRepository Repo { get; set; }
         public TestController() : base()
         {
             Repo = new WhenWeGetMoneyRepository();
         }
 
-        // GET: api/Test
-        public string Get()
+        public TestController(WhenWeGetMoneyRepository _repo)
         {
-            return "Monkey Rock!";
+            Repo = _repo;
         }
 
-     
-        //public IEnumerable<Wish> Get()
+        //GET: api/Test
+        public string Get()
+        {
+            //return "Monkey Rock!";
+
+            //List<Wish> listOfWishes = Repo.GetAllWishes();
+            //return listOfWishes[1].Content;
+
+            List<Wish> listOfWishes = Repo.GetAllWishes();
+            var json = JsonConvert.SerializeObject(listOfWishes);
+            return json;
+        }
+
+
+        //public List<Wish> Get()
         //{
-        //    List<Wish> listOfWishes = Repo.GetAllWishes();
-        //    return Repo.GetAllWishes();
+        //   // return List<Wish> listOfWishes = Repo.GetAllWishes().ToList();
+        //    return  Repo.GetAllWishes().ToList();
+
+        //    //return listOfWishes[0].Content;
         //}
 
         //public IEnumerable<string> Get()
@@ -38,7 +53,7 @@ namespace WhenWeGetMoney.Controllers
 
         //public string Get()
         //{
-            
+
         //    //return "Monkey Rock!";
         //}
 

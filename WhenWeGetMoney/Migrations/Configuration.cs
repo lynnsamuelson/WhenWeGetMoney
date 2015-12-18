@@ -24,7 +24,6 @@ namespace WhenWeGetMoney.Migrations
            new MoneyPot() { DollarAmount = 4001.01m, DateUpdated = DateTime.Now },
            new MoneyPot() { DollarAmount = 21.01m, DateUpdated = DateTime.Now }
            );
-            //context.SaveChanges();
            
 
             context.Families.AddOrUpdate(p => p.FamilyName,

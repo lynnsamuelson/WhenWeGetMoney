@@ -5,7 +5,8 @@ using System.Linq;
 using System.Web;
 
 namespace WhenWeGetMoney.Models
-{
+{ 
+    [Serializable]
     public class Wish
     {
         public virtual Family Author { get; set; }
@@ -18,6 +19,12 @@ namespace WhenWeGetMoney.Models
         public int WishPriority { get; set; }
         public string Picture { get; set; }
         public string WishUrl { get; set; }
+
+        //public Wish (Family FamilyToAdd)
+        //{
+        //    Author = FamilyToAdd;
+        //}
+
 
     }
 }

@@ -19,7 +19,7 @@ namespace WhenWeGetMoney.Tests.Models
         {
             Wish wish = new Wish();
             DateTime expected_time = DateTime.Now;
-            wish.Author = new Family();
+            wish.Author = new Family { FamilyName = "Bernie"};
             wish.Content = "Toyota Prius";
             wish.Date = expected_time;
             wish.WishId = 3;
@@ -27,7 +27,7 @@ namespace WhenWeGetMoney.Tests.Models
             wish.Picture = "http://www.toyota.com/upcoming-vehicles/prius/";
             wish.WishUrl = "http://www.toyota.com/upcoming-vehicles/prius/";
 
-            Assert.AreEqual("Bernie", wish.Author);
+            Assert.AreEqual("Bernie", wish.Author.FamilyName);
             Assert.AreEqual("Toyota Prius", wish.Content);
             Assert.AreEqual(expected_time, wish.Date);
             Assert.AreEqual(3, wish.WishId);
@@ -42,9 +42,9 @@ namespace WhenWeGetMoney.Tests.Models
             //Arrange
             DateTime expected_time = DateTime.Now;
             //Act
-            Wish wish = new Wish { Author = new Family(), Content = "Toyota Prius", Date = expected_time, WishId = 3, WishPriority = 1, Picture = "http://www.toyota.com/upcoming-vehicles/prius/", WishUrl = "http://www.toyota.com/upcoming-vehicles/prius/" };
+            Wish wish = new Wish { Author = new Family { FamilyName = "Bernie" }, Content = "Toyota Prius", Date = expected_time, WishId = 3, WishPriority = 1, Picture = "http://www.toyota.com/upcoming-vehicles/prius/", WishUrl = "http://www.toyota.com/upcoming-vehicles/prius/" };
             //Assert
-            Assert.AreEqual("Bernie", wish.Author);
+            Assert.AreEqual("Bernie", wish.Author.FamilyName);
             Assert.AreEqual("Toyota Prius", wish.Content);
             Assert.AreEqual(expected_time, wish.Date);
             Assert.AreEqual(3, wish.WishId);

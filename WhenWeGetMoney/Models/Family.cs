@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WhenWeGetMoney;
 
 namespace WhenWeGetMoney.Models
 {
@@ -23,5 +24,10 @@ namespace WhenWeGetMoney.Models
             int answer = this.FamilyName.CompareTo(other_family.FamilyName);
             return answer;
         }
+
+        //public void AddWishToFamily(Wish wishToAdd)
+        //{
+        //    wishToAdd.Author = this;
+        //}
     }
 }

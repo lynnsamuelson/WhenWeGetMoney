@@ -6,9 +6,12 @@ app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
     $scope.hello = function () {
         //$scope.test = "Hello World";
         console.log("clicked");
-        $http.get("/api/Test/")
+        console.log("Scope.test", $scope.test);
+        $http.get("/api/Wish/")
             .success(function (data) {
-                $scope.test = data;
+                $scope.test = data[2]
+                //$scope.test = data[1];
+                console.log("data", data)
             })
             .error(function (error) { alert(error.error) });
     }
