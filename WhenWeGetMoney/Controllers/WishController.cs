@@ -26,13 +26,23 @@ namespace WhenWeGetMoney.Controllers
         // GET: api/Wish
         public List<Wish> Get()
         {
-            return Repo.GetAllWishes();
-            //List<Wish> listOfWishes = Repo.GetAllWishes();
-            //var json = JsonConvert.SerializeObject(listOfWishes);
+            return  Repo.GetAllWishes();
+
+            //string json = JsonConvert.SerializeObject(new
+            //{
+            //    listOfWishes = Repo.GetAllWishes()
+            //}
+            //);
             //return json;
 
-            //List<Wish> listOfWishes = Repo.GetAllWishes();
-            //return listOfWishes[1].Content;
+            //string json = JsonConvert.SerializeObject(new
+            //{
+            //    results = new List<Wish>()
+            //    {
+            //     new Wish { Content = "Testing"  },
+            //     new Wish { Content = "Help!" }
+            //    }
+            //});
         }
 
         // GET: api/Wish/5

@@ -9,10 +9,21 @@
 <div class="col-xs-12">
     <input type="text" placeholder="search" />
     <div ng-controller="Controller">
-        <p>{{test}}</p>
+        <p>{{wishes}}</p>
         <button ng-click="hello()">Click me!</button>
     </div>
 </div>
 <div>
     Wish List
+</div>
+
+
+<div>
+    @*@foreach (var item in Model)
+    {
+        if (item.Content != null)
+        {
+            <ul>@item.Content</ul>
+        }
+    }*@
 </div>

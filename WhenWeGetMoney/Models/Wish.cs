@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Runtime.Serialization.Formatters;
+using System.Runtime.Serialization;
+using System.Xml;
+using System.IO;
 
 namespace WhenWeGetMoney.Models
-{ 
+{
     [Serializable]
-    public class Wish
+    public class Wish 
     {
+       
         public virtual Family Author { get; set; }
         [MaxLength(75)]
         [MinLength(1)]
