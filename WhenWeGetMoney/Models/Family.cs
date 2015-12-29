@@ -12,6 +12,10 @@ namespace WhenWeGetMoney.Models
 
         [Key]
         public int FamilyUserID { get; set; }
+
+        public virtual ApplicationUser RealUser { get; set; }
+
+
         public string FamilyName { get; set; }
         public int TypeOfFamily { get; set; }
 

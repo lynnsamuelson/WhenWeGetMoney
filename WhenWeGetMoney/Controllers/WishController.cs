@@ -7,6 +7,7 @@ using System.Web.Http;
 using Newtonsoft.Json;
 using WhenWeGetMoney.Models;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace WhenWeGetMoney.Controllers
 {
@@ -23,26 +24,12 @@ namespace WhenWeGetMoney.Controllers
             Repo = _repo;
         }
 
+        
+
         // GET: api/Wish
         public List<Wish> Get()
         {
             return  Repo.GetAllWishes();
-
-            //string json = JsonConvert.SerializeObject(new
-            //{
-            //    listOfWishes = Repo.GetAllWishes()
-            //}
-            //);
-            //return json;
-
-            //string json = JsonConvert.SerializeObject(new
-            //{
-            //    results = new List<Wish>()
-            //    {
-            //     new Wish { Content = "Testing"  },
-            //     new Wish { Content = "Help!" }
-            //    }
-            //});
         }
 
         // GET: api/Wish/5
@@ -62,8 +49,17 @@ namespace WhenWeGetMoney.Controllers
         }
 
         // DELETE: api/Wish/5
+        public void Delete()
+        {
+            string user_id = User.Identity.GetUserId(); ;
+            ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
+
+            if (real_user.Email.Contains("test7@example.com")) { Repo.DeleteAllUsers(); }
+        }
+
         public void Delete(int id)
         {
+
         }
     }
 }

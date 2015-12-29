@@ -18,15 +18,31 @@ namespace WhenWeGetMoney.Controllers
             Repo = new WhenWeGetMoneyRepository();
         }
 
-        // GET: WhenWeGetMoney
-        public ActionResult Index()
+        public ActionResult Admin()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-
+            List<Family> all_families = Repo.GetAllFamilies();
+            return View(all_families);
         }
 
+        public ActionResult Index()
+        {
+            string user_id = User.Identity.GetUserId();
+            ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
+            Family me = null;
+            try
+            {
+                me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+            }
+            catch (Exception)
+            {
+                bool successful = Repo.CreateFamily(real_user, "Rice");
+            }
+            List<Wish> my_wishes = Repo.GetAllWishes();
+            // How you send a list of anything to a view
+            return View(my_wishes);
+        }
+
+        
         public ActionResult moneyPot()
         {
             return View();

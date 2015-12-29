@@ -5,6 +5,8 @@ using WhenWeGetMoney.Models;
 using Moq;
 using System.Data.Entity;
 using System.Linq;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace WhenWeGetMoney.Tests.Models
 {
@@ -16,6 +18,7 @@ namespace WhenWeGetMoney.Tests.Models
         private Mock<DbSet<Family>> mock_family_set;
         private Mock<DbSet<Wish>> mock_wish_set;
         private Mock<DbSet<MoneyPot>> mock_moneyPot_set;
+        private ApplicationUser test_user;
 
         private WhenWeGetMoneyRepository repository;
 
@@ -63,7 +66,10 @@ namespace WhenWeGetMoney.Tests.Models
             mock_wish_set = new Mock<DbSet<Wish>>();
             mock_moneyPot_set = new Mock<DbSet<MoneyPot>>();
             repository = new WhenWeGetMoneyRepository(mock_context.Object);
+            test_user = new ApplicationUser { Email = "test5@example.com", Id = "myid-whoo" };
         }
+
+
 
         [TestCleanup]
         public void Cleanup()
@@ -162,7 +168,7 @@ namespace WhenWeGetMoney.Tests.Models
         }
 
         [TestMethod]
-        public void WhenWeGetMoneyEnsureFamileyNameIsAvailable()
+        public void WhenWeGetMoneyEnsureFamilyNameIsAvailable()
         {
             //Arrange
             var expected = new List<Family>
@@ -320,45 +326,48 @@ namespace WhenWeGetMoney.Tests.Models
         }
 
         [TestMethod]
-        public void WhenWeGetMoneyRepositoryEnsureICanGetWishesByFamiliyID()
+        public void WhenWeGetMoneyRepositoyEnsureICanCreateAFamily()
         {
-            //Arrange
-            List<Wish> expected = new List<Wish>
-            {
-                new Wish { Author = new Family {FamilyUserID = 7 }, Content = "Disney World", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "disneyworld.com" },
-                new Wish { Author = new Family {FamilyUserID = 6 }, Content = "Toyota Prius", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "toyta.com/prius" },
-                new Wish { Author = new Family {FamilyUserID = 5 }, Content = "TV", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "sony.com" },
-                new Wish { Author = new Family {FamilyUserID = 7 }, Content = "Hard Drive", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "newegg.com" },
-                new Wish { Author = new Family {FamilyUserID = 4 }, Content = "Dolly", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "matel.com" },
-                new Wish { Author = new Family {FamilyUserID = 3 }, Content = "Beatle's Album", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "amazon.com" },
-                new Wish { Author = new Family {FamilyUserID = 2 }, Content = "computer", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "dell.com" },
-                new Wish { Author = new Family {FamilyUserID = 1 }, Content = "Samsung Galaxy6", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "samsung.com" },
-                new Wish { Author = new Family {FamilyUserID = 6 }, Content = "New Windows", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "windowworld.com" },
-                new Wish { Author = new Family {FamilyUserID = 5 }, Content = "Bathroom Renovation", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "homedepot.com" },
-                new Wish { Author = new Family {FamilyUserID = 4 }, Content = "Alaskan Cruise", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "carnival.com" },
-                new Wish { Author = new Family {FamilyUserID = 3 }, Content = "Pool", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "pools.com" },
-                new Wish { Author = new Family {FamilyUserID = 2 }, Content = "Inground Pool", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "pools.com" }
-            };
-            mock_wish_set.Object.AddRange(expected);
-            ConnectMocksToDataStore(expected);
-
-            List<Family> bratlie =  new List<Family> { new Family() { FamilyUserID = 2, FamilyName = "Bratlie", TypeOfFamily = 4 } };
-            mock_family_set.Object.AddRange(bratlie);
-            ConnectMocksToDataStore(bratlie);
-
-            List<Wish> expected_wishes = new List<Wish>
-            {
-                new Wish { Author = new Family {FamilyUserID = 2 }, Content = "computer", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "dell.com" },
-                new Wish { Author = new Family {FamilyUserID = 2 }, Content = "Inground Pool", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "pools.com" }
-            };
+            DateTime base_time = DateTime.Now;
+            List<Family> family_user_data_source = new List<Family>();
+            ConnectMocksToDataStore(family_user_data_source);
+            string user_familyname = "Anderson";
+            mock_family_set.Setup(j => j.Add(It.IsAny<Family>())).Callback((Family s) => family_user_data_source.Add(s));
 
             //Act
-            List<Wish> actual = repository.GetFamilyWishes(bratlie[0]);
+            bool successful = repository.CreateFamily(test_user, user_familyname);
 
             //Assert
-            Assert.AreEqual("computer", actual.First().Content);
-            //CollectionAssert.AreEqual(expected_wishes, actual);
+            Family family_user = repository.GetAllFamilies().Where(u => u.RealUser.Id == test_user.Id).SingleOrDefault();
+            Assert.IsNotNull(family_user);
+            Assert.AreEqual(test_user.Id, family_user.RealUser.Id);
+            Assert.AreEqual(1, repository.GetAllFamilies().Count);
 
+        }
+
+
+        [TestMethod]
+        public void WhenWeGetMoneyRepositoryEnsureICanNotCreateAFamilyWithDuplicateHandle()
+        {
+            // Arrange
+            DateTime base_time = DateTime.Now;
+            List<Family> family_user_data_source = new List<Family>
+            {
+                new Family { FamilyUserID= 1, FamilyName = "Anderson"}
+            };// This is our database table
+            ConnectMocksToDataStore(family_user_data_source);
+            //string user_id = User.Identity.GetUserId();
+            string user_FamilyName = "Anderson";
+            // Forces DbSet.Add to behave like List.Add
+            mock_family_set.Setup(j => j.Add(It.IsAny<Family>())).Callback((Family s) => family_user_data_source.Add(s));
+
+
+            // Act
+            bool successful = repository.CreateFamily(test_user, user_FamilyName);
+
+            // Assert
+            Assert.IsFalse(successful);
+            Assert.AreEqual(1, repository.GetAllFamilies().Count);
         }
 
 

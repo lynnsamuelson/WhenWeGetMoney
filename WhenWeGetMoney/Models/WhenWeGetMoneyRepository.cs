@@ -58,11 +58,26 @@ namespace WhenWeGetMoney.Models
 
         public List<Wish> GetFamilyWishes(Family user)
         {
-            var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
-            Family found_user = query.Single<Family>();
-            return found_user.Wishes.ToList();
+            if (user != null)
+            {
+                var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
+                Family found_user = query.Single<Family>();
+                if (found_user == null)
+                {
+                    return new List<Wish>();
+                }
+                return found_user.Wishes.ToList();
+            } else
+            {
+                return new List<Wish>();
+            }
         }
-
+        public void DeleteAllUsers()
+        {
+            Context.Families.RemoveRange(Context.Families);
+            Context.SaveChanges();
+        }
+ 
         public bool IsFamilyNameAvailable(string name)
         {
             bool available = false;
@@ -131,6 +146,30 @@ namespace WhenWeGetMoney.Models
                 is_added = false;
             }
             return is_added;
+        }
+
+        public bool CreateFamily(ApplicationUser app_user, string new_FamilyName)
+        {
+            bool handle_is_available = this.IsFamilyNameAvailable(new_FamilyName);
+            if (handle_is_available)
+            {
+                Family new_user = new Family { RealUser = app_user, FamilyName = new_FamilyName };
+                bool is_added = true;
+                try
+                {
+                    Family added_user = _context.Families.Add(new_user);
+                    _context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    is_added = false;
+                }
+                return is_added;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

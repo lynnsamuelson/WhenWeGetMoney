@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WhenWeGetMoney.Models.Family>
+
+@{
+    Layout = "~/Views/Shared/_WhenWeGetMoney.cshtml";
+}
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FamilyUserID</td>
+            <td>@item.FamilyName</td>
+            @if (item.RealUser == null)
+            {
+                <td>Not Connected</td>
+                <td>Nope</td>
+            }
+            else
+            {
+                <td>@item.RealUser.Email</td>
+                <td>
+                    @item.RealUser.Id
+                </td>
+            }
+        </tr>
+    }
+</table>
+<div ng-controller="Controller">
+    <button ng-click="deleteUsers()">Delete all Users!</button>
+</div>

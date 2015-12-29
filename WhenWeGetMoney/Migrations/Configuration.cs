@@ -24,6 +24,7 @@ namespace WhenWeGetMoney.Migrations
            new MoneyPot() { DollarAmount = 4001.01m, DateUpdated = DateTime.Now },
            new MoneyPot() { DollarAmount = 21.01m, DateUpdated = DateTime.Now }
            );
+            context.SaveChanges();
            
 
             context.Families.AddOrUpdate(p => p.FamilyName,
@@ -34,21 +35,21 @@ namespace WhenWeGetMoney.Migrations
                 new Family() { FamilyName = "Roberts", TypeOfFamily = 2, money = context.MoneyPots.Single<MoneyPot>(s => s.MoneyPotId == 5) },
                 new Family() { FamilyName = "Lambert", TypeOfFamily = 2, money = context.MoneyPots.Single<MoneyPot>(s => s.MoneyPotId == 6) }
                 );
-
+            context.SaveChanges();
             context.Wishes.AddOrUpdate(p => p.Content,
-                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 5), Content = "Disney World", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "disneyworld.com" },
+                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 5), Content = "Disney World", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "disneyworld.com", BoughtIt=true },
                 new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 6), Content = "Toyota Prius", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "toyta.com/prius" },
-                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 7), Content = "TV", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "sony.com" },
-                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 8), Content = "Hard Drive", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "newegg.com" },
-                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 9), Content = "Dolly", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "matel.com" },
-                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 10), Content = "Beatle's Album", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "amazon.com" },
+                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 4), Content = "TV", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "sony.com" },
+                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 3), Content = "Hard Drive", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "newegg.com", BoughtIt=true },
+                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 2), Content = "Dolly", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "matel.com" },
+                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 1), Content = "Beatle's Album", Date = DateTime.Now, WishPriority = 2, Picture = "google.com", WishUrl = "amazon.com" },
                 new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 5), Content = "computer", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "dell.com" },
-                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 6), Content = "Samsung Galaxy6", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "samsung.com" },
-                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 7), Content = "New Windows", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "windowworld.com" },
-                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 8), Content = "Bathroom Renovation", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "homedepot.com" },
-                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 9), Content = "Alaskan Cruise", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "carnival.com" },
-                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 10), Content = "Pool", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "pools.com" },
-                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 7), Content = "Inground Pool", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "pools.com" }
+                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 6), Content = "Samsung Galaxy6", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "samsung.com", BoughtIt=true },
+                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 4), Content = "New Windows", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "windowworld.com" },
+                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 3), Content = "Bathroom Renovation", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "homedepot.com" },
+                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 2), Content = "Alaskan Cruise", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "carnival.com" },
+                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 1), Content = "Pool", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "pools.com" },
+                new Wish { Author = context.Families.Single<Family>(s => s.FamilyUserID == 3), Content = "Inground Pool", Date = DateTime.Now, WishPriority = 1, Picture = "google.com", WishUrl = "pools.com" }
 
                 );
 

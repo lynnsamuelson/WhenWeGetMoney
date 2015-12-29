@@ -24,6 +24,7 @@ namespace WhenWeGetMoney.Models
         public int WishPriority { get; set; }
         public string Picture { get; set; }
         public string WishUrl { get; set; }
+        public bool BoughtIt { get; set; }
 
         //public Wish (Family FamilyToAdd)
         //{

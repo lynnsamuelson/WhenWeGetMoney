@@ -193,10 +193,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201512151633414_InitialCreate.cs" />
-    <Compile Include="Migrations\201512151633414_InitialCreate.Designer.cs">
-      <DependentUpon>201512151633414_InitialCreate.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\201512290318088_initialCreate.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Family.cs" />
@@ -212,6 +209,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
+    <Content Include="App\Wishes.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\main.css" />
@@ -1055,6 +1053,7 @@
     <Content Include="Views\WhenWeGetMoney\boughtIt.cshtml" />
     <Content Include="Views\WhenWeGetMoney\Index.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\WhenWeGetMoney\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1068,8 +1067,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512151633414_InitialCreate.resx">
-      <DependentUpon>201512151633414_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512290318088_initialCreate.resx">
+      <DependentUpon>201512290318088_initialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
