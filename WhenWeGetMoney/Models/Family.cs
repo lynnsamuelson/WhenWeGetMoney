@@ -15,7 +15,7 @@ namespace WhenWeGetMoney.Models
 
         public virtual ApplicationUser RealUser { get; set; }
 
-
+        [Required]
         public string FamilyName { get; set; }
         public int TypeOfFamily { get; set; }
 

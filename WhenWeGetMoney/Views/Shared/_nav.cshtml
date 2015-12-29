@@ -13,10 +13,9 @@
                 <
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Home", "Index", "WhenWeGetMoney")</li>
-                        <li>@Html.ActionLink("$ Pot", "moneyPot", "WhenWeGetMoney")</li>
-                        <li>@Html.ActionLink("Wish List", "wishList", "WhenWeGetMoney")</li>
+                        <li>@Html.ActionLink("Wish List", "Index", "WhenWeGetMoney")</li>
                         <li>@Html.ActionLink("Bought It", "boughtIt", "WhenWeGetMoney")</li>
+                        <li>@Html.ActionLink("$ Pot", "moneyPot", "WhenWeGetMoney")</li>
                     }
                     else
                     {
