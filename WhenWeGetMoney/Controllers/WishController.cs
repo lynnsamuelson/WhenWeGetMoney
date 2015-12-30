@@ -29,7 +29,8 @@ namespace WhenWeGetMoney.Controllers
         // GET: api/Wish
         public List<Wish> Get()
         {
-            return  Repo.GetAllWishes();
+            Family familyId = Repo.GetFamilyById(1);
+            return  Repo.GetFamilyWishes(familyId);
         }
 
         // GET: api/Wish/5

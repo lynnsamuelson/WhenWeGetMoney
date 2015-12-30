@@ -66,5 +66,11 @@ namespace WhenWeGetMoney.Tests.Controllers
             //Assert
             Assert.AreEqual(json, actual);
         }
+
+        [TestMethod]
+        public void WishControllerICanGetWishesFromCurrentUser()
+        {
+
+        }
     }
 }

@@ -42,11 +42,8 @@ namespace WhenWeGetMoney.Models
 
         public Family GetFamilyByName(string FamilyName)
         {
-            // SQL: select * from JitterUsers AS users where users.Handle = handle;
+           
             var query = from family in _context.Families where family.FamilyName == FamilyName select family;
-            // IQueryable<JitterUser> query = from user in _context.JitterUsers where user.Handle == handle select user;
-            // We need to make sure there's exactly one user returned. hmmmm.
-
             return query.SingleOrDefault();
         }
 
@@ -58,18 +55,25 @@ namespace WhenWeGetMoney.Models
 
         public List<Wish> GetFamilyWishes(Family user)
         {
+            //var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
+            //Family found_user = query.Single<Family>();
+            //return found_user.Wishes.ToList();
+
             if (user != null)
             {
                 var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
                 Family found_user = query.Single<Family>();
+
                 if (found_user == null)
                 {
-                    return new List<Wish>();
+                    return new List<Wish> { new Wish() { Content = "found_user is null" } };
                 }
                 return found_user.Wishes.ToList();
-            } else
+            }
+            else
             {
-                return new List<Wish>();
+                return new List<Wish> { new Wish() { Content = "found_user is in else" } };
+
             }
         }
         public void DeleteAllUsers()
