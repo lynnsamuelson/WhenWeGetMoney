@@ -27,19 +27,22 @@ namespace WhenWeGetMoney.Controllers
         public ActionResult Index()
         {
             
-            string user_id = User.Identity.GetUserId();
 
-            ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
-            
-            Family me = null;
-            try
-            {
-                me = Repo.GetFamilyById(user_id).Where(u => u.RealUser.Id == user_id).SingleOrDefault();
-            }
-            catch (Exception)
-            {
-                bool successful = Repo.CreateFamily(real_user, "Rice");
-            }
+            //ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
+
+            //Family me = null;
+            //try
+            //{
+            //    me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+            //}
+            //catch (Exception)
+            //{
+            //    bool successful = Repo.CreateFamily(real_user, "Rice");
+            //}
+
+            string user_id = User.Identity.GetUserId();
+            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+
             List<Wish> my_wishes = Repo.GetFamilyWishes(me);
             return View(my_wishes);
         }
