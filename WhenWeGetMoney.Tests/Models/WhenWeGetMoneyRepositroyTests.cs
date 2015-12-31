@@ -203,40 +203,40 @@ namespace WhenWeGetMoney.Tests.Models
             Assert.IsFalse(is_available);
         }
 
-        [TestMethod]
-        public void WhenWeGetMoneyEnsureICanSearchByName()
-        {
-            //Arrange
-            var expected = new List<Family>
-            {
-                new Family {FamilyName = "Rice", TypeOfFamily = 4, FamilyUserID = 8 },
-                new Family {FamilyName = "Samuelson", TypeOfFamily = 2, FamilyUserID = 6 },
-                new Family {FamilyName = "Olson", TypeOfFamily = 1, FamilyUserID = 9 },
-                new Family {FamilyName = "Sonson", TypeOfFamily = 2, FamilyUserID = 7 },
-                new Family {FamilyName = "Sharsonville", TypeOfFamily = 2, FamilyUserID = 6 }
+        //[TestMethod]
+        //public void WhenWeGetMoneyEnsureICanSearchByName()
+        //{
+        //    //Arrange
+        //    var expected = new List<Family>
+        //    {
+        //        new Family {FamilyName = "Rice", TypeOfFamily = 4, FamilyUserID = 8 },
+        //        new Family {FamilyName = "Samuelson", TypeOfFamily = 2, FamilyUserID = 6 },
+        //        new Family {FamilyName = "Olson", TypeOfFamily = 1, FamilyUserID = 9 },
+        //        new Family {FamilyName = "Sonson", TypeOfFamily = 2, FamilyUserID = 7 },
+        //        new Family {FamilyName = "Sharsonville", TypeOfFamily = 2, FamilyUserID = 6 }
 
 
 
-            };
-            mock_family_set.Object.AddRange(expected);
-            ConnectMocksToDataStore(expected);
-            // Act
-            string search_term = "son";
-            List<Family> expected_users = new List<Family>
-            {
-                new Family {FamilyName = "Olson", TypeOfFamily = 1, FamilyUserID = 9 },
-                new Family {FamilyName = "Samuelson", TypeOfFamily = 2, FamilyUserID = 6 },
-                new Family {FamilyName = "Sharsonville", TypeOfFamily = 2, FamilyUserID = 6 },
-                new Family {FamilyName = "Sonson", TypeOfFamily = 2, FamilyUserID = 7 }
-            };
+        //    };
+        //    mock_family_set.Object.AddRange(expected);
+        //    ConnectMocksToDataStore(expected);
+        //    // Act
+        //    string search_term = "son";
+        //    List<Family> expected_users = new List<Family>
+        //    {
+        //        new Family {FamilyName = "Olson", TypeOfFamily = 1, FamilyUserID = 9 },
+        //        new Family {FamilyName = "Samuelson", TypeOfFamily = 2, FamilyUserID = 6 },
+        //        new Family {FamilyName = "Sharsonville", TypeOfFamily = 2, FamilyUserID = 6 },
+        //        new Family {FamilyName = "Sonson", TypeOfFamily = 2, FamilyUserID = 7 }
+        //    };
 
-            List<Family> actual_users = repository.SearchByName(search_term);
+        //    List<Family> actual_users = repository.SearchByName(search_term);
 
-            // Assert
-            Assert.AreEqual(expected_users[0].FamilyName, actual_users[0].FamilyName);
-            Assert.AreEqual(expected_users[1].FamilyName, actual_users[1].FamilyName);
-            Assert.AreEqual(expected_users[2].FamilyName, actual_users[2].FamilyName);
-        }
+        //    // Assert
+        //    Assert.AreEqual(expected_users[0].FamilyName, actual_users[0].FamilyName);
+        //    Assert.AreEqual(expected_users[1].FamilyName, actual_users[1].FamilyName);
+        //    Assert.AreEqual(expected_users[2].FamilyName, actual_users[2].FamilyName);
+        //}
 
         [TestMethod]
        public void WhenWeGetMoneyEnsureIHaveAContext()

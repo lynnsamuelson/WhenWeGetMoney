@@ -26,23 +26,35 @@ namespace WhenWeGetMoney.Controllers
 
         public ActionResult Index()
         {
+            
             string user_id = User.Identity.GetUserId();
+
             ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
+            
             Family me = null;
             try
             {
-                me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+                me = Repo.GetFamilyById(user_id).Where(u => u.RealUser.Id == user_id).SingleOrDefault();
             }
             catch (Exception)
             {
                 bool successful = Repo.CreateFamily(real_user, "Rice");
             }
-            List<Wish> my_wishes = Repo.GetAllWishes();
-            // How you send a list of anything to a view
+            List<Wish> my_wishes = Repo.GetFamilyWishes(me);
             return View(my_wishes);
         }
 
-        
+        public ActionResult WishFeed()
+        {
+           string user_id = User.Identity.GetUserId();
+            
+           Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+
+           List<Wish> list_of_wishes = Repo.GetFamilyWishes(me);
+           return View(list_of_wishes);
+        }
+
+
         public ActionResult moneyPot()
         {
             return View();

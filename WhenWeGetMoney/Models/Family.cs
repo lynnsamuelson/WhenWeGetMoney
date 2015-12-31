@@ -29,6 +29,7 @@ namespace WhenWeGetMoney.Models
             return answer;
         }
 
+       
         //public void AddWishToFamily(Wish wishToAdd)
         //{
         //    wishToAdd.Author = this;

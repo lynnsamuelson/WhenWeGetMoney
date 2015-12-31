@@ -47,9 +47,10 @@ namespace WhenWeGetMoney.Models
             return query.SingleOrDefault();
         }
 
-        public Family GetFamilyById(int FamilyUserID)
+        public Family GetFamilyById(string FamilyUserID)
         {
-            var query = from u in _context.Families where u.FamilyUserID == FamilyUserID select u;
+            int numbId = Int32.Parse(FamilyUserID);
+            var query = from u in _context.Families where u.FamilyUserID == numbId select u;
             return query.SingleOrDefault();
         }
 
