@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WhenWeGetMoney.Models.Wish>
+﻿@model IEnumerable<WhenWeGetMoney.Models.Family>
 
 @{
     Layout = "~/Views/Shared/_WhenWeGetMoney.cshtml";
@@ -7,32 +7,83 @@
 
 <div ng-controller="Controller">
 
-<div>
-    <h3>Wish List</h3>
-</div>
+    <div>
+        <h3>Wish List</h3>
+    </div>
 
-<div class="row">
-    <div class="col-lg-6 col-lg-offset-3">
-        <div class="wish">
-            <table>
-                <tr>
-                    <th class="text-center">Priotiy</th>
-                    <th class="text-center">Wish</th>
-                    <th class="text-center">Date Added</th>
-                </tr>
-                
-                    @foreach (var Wish in Model)
-                            {
-                                <tr>
-                                    <td class="text-center">@Wish.WishPriority</td>
-                                    <td class="text-center">@Wish.Content</td>
-                                    <td class="text-center">@Wish.Date.ToString("MMM dd yyyy")</td>
-                                </tr>
-                            }
-              </table>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="wish">
+                <table>
+                    <tr>
+                        <th class="text-center">Priotiy</th>
+                        <th class="text-center">Wish</th>
+                        <th class="text-center">Date Added</th>
+                    </tr>
+
+                    @foreach (var Family in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@Family.Wishes</td>
+                        </tr>
+                    }
+                </table>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
 
-   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model IEnumerable<WhenWeGetMoney.Models.Wish>
+
+    @{
+        Layout = "~/Views/Shared/_WhenWeGetMoney.cshtml";
+    }
+
+
+    <div ng-controller="Controller">
+
+    <div>
+        <h3>Wish List</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="wish">
+                <table>
+                    <tr>
+                        <th class="text-center">Priotiy</th>
+                        <th class="text-center">Wish</th>
+                        <th class="text-center">Date Added</th>
+                    </tr>
+
+                        @foreach (var Wish in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center">@Wish.WishPriority</td>
+                                        <td class="text-center">@Wish.Content</td>
+                                        <td class="text-center">@Wish.Date.ToString("MMM dd yyyy")</td>
+                                    </tr>
+                                }
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>*@
+

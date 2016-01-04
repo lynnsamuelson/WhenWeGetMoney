@@ -26,25 +26,31 @@ namespace WhenWeGetMoney.Controllers
 
         public ActionResult Index()
         {
-            
 
-            //ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
+            string user_id = User.Identity.GetUserId(); //is in the e-mail account
 
-            //Family me = null;
-            //try
-            //{
-            //    me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
-            //}
-            //catch (Exception)
-            //{
-            //    bool successful = Repo.CreateFamily(real_user, "Rice");
-            //}
+            ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
 
-            string user_id = User.Identity.GetUserId();
-            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
 
-            List<Wish> my_wishes = Repo.GetFamilyWishes(me);
-            return View(my_wishes);
+            //Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+            //List<Family> me = Repo.GetAllFamilies();
+
+            //List<Wish> my_wishes = Repo.GetFamilyWishes(me);
+            //return View(my_wishes);
+
+
+
+            Family me = null;
+            try
+            {
+                me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+            }
+            catch (Exception)
+            {
+                bool successful = Repo.CreateFamily(real_user, "Rice");
+            }
+
+            return View(me);
         }
 
         public ActionResult WishFeed()

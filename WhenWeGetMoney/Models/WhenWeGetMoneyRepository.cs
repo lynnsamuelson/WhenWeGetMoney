@@ -26,6 +26,7 @@ namespace WhenWeGetMoney.Models
         {
             var query = from Families in _context.Families select Families;
             return query.ToList();
+
         }
 
         public List<Wish> GetAllWishes()
