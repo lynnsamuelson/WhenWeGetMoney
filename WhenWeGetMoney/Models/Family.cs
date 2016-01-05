@@ -30,5 +30,9 @@ namespace WhenWeGetMoney.Models
         }
 
        
+        //public void AddWishToFamily(Wish wishToAdd)
+        //{
+        //    wishToAdd.Author = this;
+        //}
     }
 }

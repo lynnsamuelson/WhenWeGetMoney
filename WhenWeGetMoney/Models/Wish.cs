@@ -26,5 +26,11 @@ namespace WhenWeGetMoney.Models
         public string WishUrl { get; set; }
         public bool BoughtIt { get; set; }
 
-      }
+        //public Wish (Family FamilyToAdd)
+        //{
+        //    Author = FamilyToAdd;
+        //}
+
+
+    }
 }
