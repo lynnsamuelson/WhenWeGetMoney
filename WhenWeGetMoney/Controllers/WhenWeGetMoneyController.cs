@@ -35,8 +35,8 @@ namespace WhenWeGetMoney.Controllers
             //List<Wish> my_wishes = Repo.GetFamilyWishes(me);
             //return View(my_wishes);
 
-
             string user_id = User.Identity.GetUserId(); //is in the e-mail account
+<<<<<<< HEAD
 
             ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
 
@@ -62,6 +62,13 @@ namespace WhenWeGetMoney.Controllers
             return View(me);
 
         }
+=======
+            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+            List<Wish> my_wishes = Repo.GetFamilyWishes(me);
+            return View(my_wishes);
+
+            }
+>>>>>>> FixDb
 
         public ActionResult WishFeed()
         {

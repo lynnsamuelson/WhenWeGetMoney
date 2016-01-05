@@ -3,7 +3,7 @@ namespace WhenWeGetMoney.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initialCreate : DbMigration
+    public partial class WWGM : DbMigration
     {
         public override void Up()
         {
@@ -12,7 +12,7 @@ namespace WhenWeGetMoney.Migrations
                 c => new
                     {
                         FamilyUserID = c.Int(nullable: false, identity: true),
-                        FamilyName = c.String(),
+                        FamilyName = c.String(nullable: false),
                         TypeOfFamily = c.Int(nullable: false),
                         money_MoneyPotId = c.Int(),
                         RealUser_Id = c.String(maxLength: 128),

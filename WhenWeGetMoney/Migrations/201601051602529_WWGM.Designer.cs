@@ -7,13 +7,13 @@ namespace WhenWeGetMoney.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class RequireFamily : IMigrationMetadata
+    public sealed partial class WWGM : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RequireFamily));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(WWGM));
         
         string IMigrationMetadata.Id
         {
-            get { return "201512291416070_RequireFamily"; }
+            get { return "201601051602529_WWGM"; }
         }
         
         string IMigrationMetadata.Source
