@@ -193,10 +193,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201512290318088_initialCreate.cs" />
-    <Compile Include="Migrations\201512291416070_RequireFamily.cs" />
-    <Compile Include="Migrations\201512291416070_RequireFamily.Designer.cs">
-      <DependentUpon>201512291416070_RequireFamily.cs</DependentUpon>
+    <Compile Include="Migrations\201601051602529_WWGM.cs" />
+    <Compile Include="Migrations\201601051602529_WWGM.Designer.cs">
+      <DependentUpon>201601051602529_WWGM.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1071,11 +1070,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512290318088_initialCreate.resx">
-      <DependentUpon>201512290318088_initialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512291416070_RequireFamily.resx">
-      <DependentUpon>201512291416070_RequireFamily.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601051602529_WWGM.resx">
+      <DependentUpon>201601051602529_WWGM.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
