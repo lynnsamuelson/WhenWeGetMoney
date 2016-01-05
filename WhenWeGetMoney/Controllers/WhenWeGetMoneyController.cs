@@ -24,6 +24,7 @@ namespace WhenWeGetMoney.Controllers
             return View(all_families);
         }
 
+        [Authorize]
         public ActionResult Index()
         {
 
@@ -43,7 +44,7 @@ namespace WhenWeGetMoney.Controllers
 
             }
 
-
+        [Authorize]
         public ActionResult WishFeed()
         {
            string user_id = User.Identity.GetUserId();
@@ -54,15 +55,16 @@ namespace WhenWeGetMoney.Controllers
            return View(list_of_wishes);
         }
 
-
+        [Authorize]
         public ActionResult moneyPot()
         {
             string user_id = User.Identity.GetUserId();
 
             Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
 
-            List<MoneyPot> amount = Repo.GetAllMoneyPots();
-            return View(amount);
+            MoneyPot amount = Repo.GetFamilyMoney(me);
+            ViewBag.Amount = amount.DollarAmount;
+            return View();
         }
 
         public ActionResult boughtIt()

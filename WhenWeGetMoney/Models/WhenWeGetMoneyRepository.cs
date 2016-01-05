@@ -85,27 +85,26 @@ namespace WhenWeGetMoney.Models
         public MoneyPot GetFamilyMoney(Family user)
         {
 
+            if (user != null)
+            {
+                var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
+                Family found_user = query.SingleOrDefault<Family>();
 
-            //if (user != null)
-            //{
-            //    var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
-            //    Family found_user = query.SingleOrDefault<Family>();
+                var moneyQuery = from money in _context.MoneyPots where money.MoneyPotId == found_user.money.MoneyPotId select money;
+                MoneyPot familyMoney = moneyQuery.SingleOrDefault();
 
-            //    var moneyQuery = from money in _context.MoneyPots where money.FundsAvailable.FamilyUserID == user.FamilyUserID select money;
-            //    var familyMoney = moneyQuery.SingleOrDefault();
+                if (found_user == null)
+                {
+                    return new MoneyPot() {  DollarAmount = 0.0m  };
+                }
+                return familyMoney;
+            }
+            else
+            {
+                return new MoneyPot()  { DollarAmount = 0.01m };
 
-            //    if (found_user == null)
-            //    {
-            //        return  new MoneyPot() { DollarAmount = 0.0m };
-            //    }
-            //    return familyMoney;
-            //}
-            //else
-            //{
-            //    return new MoneyPot() { DollarAmount = 0.01m };
-
-            //}
-            return new MoneyPot() { DollarAmount = 0.0m };
+            }
+            //return new MoneyPot() { DollarAmount = 0.0m };
         }
 
 

@@ -1058,6 +1058,7 @@
     <Content Include="Views\WhenWeGetMoney\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\WhenWeGetMoney\Admin.cshtml" />
+    <Content Include="Views\WhenWeGetMoney\_Dollar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
