@@ -187,16 +187,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MoneyPotController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\WhenWeGetMoneyController.cs" />
     <Compile Include="Controllers\WishController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201512290318088_initialCreate.cs" />
-    <Compile Include="Migrations\201512291416070_RequireFamily.cs" />
-    <Compile Include="Migrations\201512291416070_RequireFamily.Designer.cs">
-      <DependentUpon>201512291416070_RequireFamily.cs</DependentUpon>
+    <Compile Include="Migrations\201601042215504_InitialCreate.cs" />
+    <Compile Include="Migrations\201601042215504_InitialCreate.Designer.cs">
+      <DependentUpon>201601042215504_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -212,7 +212,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\app.js" />
+    <Content Include="App_Start\app.js" />
     <Content Include="App\Wishes.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -1071,11 +1071,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512290318088_initialCreate.resx">
-      <DependentUpon>201512290318088_initialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512291416070_RequireFamily.resx">
-      <DependentUpon>201512291416070_RequireFamily.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601042215504_InitialCreate.resx">
+      <DependentUpon>201601042215504_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
