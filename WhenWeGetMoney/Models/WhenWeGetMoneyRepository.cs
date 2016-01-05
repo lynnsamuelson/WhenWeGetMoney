@@ -64,13 +64,16 @@ namespace WhenWeGetMoney.Models
             if (user != null)
             {
                 var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
-                Family found_user = query.Single<Family>();
+                Family found_user = query.SingleOrDefault<Family>();
+
+                var wishQuery = from wish in _context.Wishes where wish.Author.FamilyUserID == user.FamilyUserID select wish;
+                var familyWishes = wishQuery.ToList();
 
                 if (found_user == null)
                 {
                     return new List<Wish> { new Wish() { Content = "found_user is null" } };
                 }
-                return found_user.Wishes.ToList();
+                return familyWishes;
             }
             else
             {
