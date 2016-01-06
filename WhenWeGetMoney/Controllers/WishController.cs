@@ -43,19 +43,23 @@ namespace WhenWeGetMoney.Controllers
         }
 
         // POST: api/Wish
-        public void Post(Wish new_Wish)
+        public HttpResponseMessage Post([FromBody]string new_Wish)
         {
             string user = User.Identity.GetUserId();
             ApplicationUser new_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
             Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).First();
+            if(ModelState.IsValid)
+            {
 
+            }
             //var query = from u in Repo.Context.Families where u.FamilyUserID == user.FamilyUserID select u;
             //Family found_user = query.SingleOrDefault<Family>();
 
             if (me != null)
             {
-                Repo.CreateWish(me, new_Wish.Content, new_Wish.Picture, new_Wish.WishUrl);
+                // Repo.CreateWish(me, new_Wish.Content, new_Wish.Picture, new_Wish.WishUrl);
             }
+                return new HttpResponseMessage(HttpStatusCode.OK);
 
         }
 
@@ -67,10 +71,11 @@ namespace WhenWeGetMoney.Controllers
         // DELETE: api/Wish/5
         public void Delete()
         {
-            string user_id = User.Identity.GetUserId(); ;
-            ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
+            string user = User.Identity.GetUserId(); ;
+            ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
 
-            if (real_user.Email.Contains("test7@example.com")) { Repo.DeleteAllUsers(); }
+            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).First();
+
         }
 
         public void Delete(int id)
