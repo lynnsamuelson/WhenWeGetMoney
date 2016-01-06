@@ -43,8 +43,20 @@ namespace WhenWeGetMoney.Controllers
         }
 
         // POST: api/Wish
-        public void Post([FromBody]string value)
+        public void Post(Wish new_Wish)
         {
+            string user = User.Identity.GetUserId();
+            ApplicationUser new_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
+            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).First();
+
+            //var query = from u in Repo.Context.Families where u.FamilyUserID == user.FamilyUserID select u;
+            //Family found_user = query.SingleOrDefault<Family>();
+
+            if (me != null)
+            {
+                Repo.CreateWish(me, new_Wish.Content, new_Wish.Picture, new_Wish.WishUrl);
+            }
+
         }
 
         // PUT: api/Wish/5

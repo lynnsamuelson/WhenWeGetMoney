@@ -16,6 +16,38 @@
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
             <div class="wish">
+                <div>
+s                    <div method="post">
+                        <div id="addWish">
+                            <input ng-model="content" placeholder="Add Wish" />
+                        </div>
+                        <div id="wishUrl">
+                            <input ng-model="wishUrl" placeholder="Add Link" />
+                        </div>
+                        <div id="wishPicture">
+                            <input ng-model="picture" placeholder="Add Picture" />
+                        </div>
+                        <p>
+                            {{content}}, {{wishUrl}}, {{picture}}
+                        </p>
+                         <button ng-click="createWish()">Save Wish</button>
+                    </div>
+                </div>
+
+                @*<div class="midEntry col-md-4">
+                    <div method="post">
+                        <input ng-model="title" placeholder="Journal Title" />
+                        <textarea ng-model="body"></textarea>
+                    </div>
+                    <p>{{word}}</p>
+                    <button ng-click="test()">Click Me</button>
+                    <button ng-click="createEntry()">Save Journal Entry</button>
+                </div>*@
+
+
+
+
+
                 <table>
                     <tr>
                         <th class="text-center">Priotiy</th>

@@ -277,9 +277,11 @@ namespace WhenWeGetMoney.Tests.Models
             ConnectMocksToDataStore(expected_wishes);
             Family Family1 = new Family { FamilyName = "Rice" };
             string content = "Spring Training";
+            string picture = "baseball";
+            string url = "www.baseball.com";
             mock_wish_set.Setup(j => j.Add(It.IsAny<Wish>())).Callback((Wish s) => expected_wishes.Add(s));
             // Act
-            bool successful = repository.CreateWish(Family1, content);
+            bool successful = repository.CreateWish(Family1, content, picture, url);
 
             // Assert
             Assert.AreEqual(1, repository.GetAllWishes().Count);

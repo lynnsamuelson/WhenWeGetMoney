@@ -140,20 +140,15 @@ namespace WhenWeGetMoney.Models
             return found_users;
         }
 
-        public bool CreateWish(Family family1, string content)
+        public bool CreateWish(Family family1, string content, string picture, string wishUrl)
         {
-            Wish a_wish = new Wish { Content = content, Date = DateTime.Now, Author = family1 };
+            Wish a_wish = new Wish { Content = content, Date = DateTime.Now, Author = family1, Picture = picture, WishUrl = wishUrl };
             bool is_added = true;
             try
             {
                 Wish added_wish = _context.Wishes.Add(a_wish);
                 _context.SaveChanges();
-                // Why is this null? Are the Docs inaccurate?
-                /*
-                if (added_jot == null)
-                {
-                    is_added = false;
-                }*/
+               
             }
             catch (Exception)
             {
@@ -170,12 +165,7 @@ namespace WhenWeGetMoney.Models
             {
                 MoneyPot added_dollars = _context.MoneyPots.Add(a_dollars);
                 _context.SaveChanges();
-                // Why is this null? Are the Docs inaccurate?
-                /*
-                if (added_jot == null)
-                {
-                    is_added = false;
-                }*/
+               
             }
             catch (Exception)
             {

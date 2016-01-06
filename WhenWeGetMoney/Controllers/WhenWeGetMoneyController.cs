@@ -89,6 +89,8 @@ namespace WhenWeGetMoney.Controllers
             return View();
         }
 
+        
+
         // POST: WhenWeGetMoney/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
