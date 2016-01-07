@@ -43,11 +43,15 @@ namespace WhenWeGetMoney.Controllers
         }
 
         // POST: api/Wish
-        public HttpResponseMessage Post(Wish new_Wish)
+        [System.Web.Http.Route("api/Wish/")]
+        [System.Web.Http.HttpPost]
+        public void Post([FromBody]Wish newWish)
         {
             string user = User.Identity.GetUserId();
             ApplicationUser new_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
-            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).First();
+            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).SingleOrDefault();
+
+           // Wish new_wish = new Wish { Author = me, Content = newWish.Content, Picture = newWish.Picture, WishUrl = newWish.WishUrl, Date = DateTime.Now, BoughtIt = false };
             if(ModelState.IsValid)
             {
 
@@ -55,9 +59,9 @@ namespace WhenWeGetMoney.Controllers
            
             if (me != null)
             {
-                 Repo.CreateWish(me, new_Wish.Content, new_Wish.Picture, new_Wish.WishUrl);
+                 Repo.CreateWish(me, newWish.Content, newWish.Picture, newWish.WishUrl);
             }
-                return new HttpResponseMessage(HttpStatusCode.OK);
+                //return new HttpResponseMessage(HttpStatusCode.OK);
 
         }
 
@@ -71,9 +75,7 @@ namespace WhenWeGetMoney.Controllers
         {
             string user = User.Identity.GetUserId(); ;
             ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
-
-            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).First();
-
+            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).SingleOrDefault();
         }
 
         public void Delete(int id)
