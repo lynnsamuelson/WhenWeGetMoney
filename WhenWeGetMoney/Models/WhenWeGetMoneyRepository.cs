@@ -113,7 +113,14 @@ namespace WhenWeGetMoney.Models
             Context.Families.RemoveRange(Context.Families);
             Context.SaveChanges();
         }
- 
+
+        public void DeleteWish(Wish family_wish)
+        {
+            //Context.Wishes.RemoveRange(Context.Wishes);
+            Context.Wishes.Remove(family_wish);
+            Context.SaveChanges();
+        }
+
         public bool IsFamilyNameAvailable(string name)
         {
             bool available = false;

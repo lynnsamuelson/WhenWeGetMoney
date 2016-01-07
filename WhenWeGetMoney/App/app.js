@@ -2,34 +2,6 @@
 
 app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
 
-    //$http.get("/api/Wish/")
-    //    .success(function (data) {
-    //        $scope.wishes = data;
-    //        console.log("data test", data);
-    //        //$scope.wish = $scope.wishes[5]["<Content>k__BackingField"];
-    //        //console.log("Scope.wish[5]", $scope.wish);
-            
-    //        $scope.allWishes = [];
-    //        //console.log("all wishes before loop", $scope.allWishes);
-
-    //        for (var i = 0; i < data.length; i++) {
-    //            $scope.familyId = $scope.wishes[i]["<Author>k_backingField"];
-    //            console.log("familyID", $scope.familyId);
-    //            $scope.theWish = $scope.wishes[i]["<Content>k__BackingField"];
-    //            //console.log("the current wish", $scope.wishes[i]["<Content>k__BackingField"]);
-    //            $scope.allWishes.push($scope.wishes[i]["<Content>k__BackingField"]);
-
-    //        }
-    //        console.log("all wishes after loop", $scope.allWishes);
-            
-
-          
-
-    //    })
-    //    .error(function (error) { alert(error.error) });
-
-
-    //$scope.test = "test variable";
 
     $scope.deleteUsers = function () {
         $http.delete("/api/Test")
@@ -42,21 +14,20 @@ app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
     }
 
 
-
     $scope.createWish = function () {
-        console.log("I Work!");
+        console.log("Found Create Wish Btn");
         $form = $("#myform").first();
-
-      
 
         $wish = {
             "Content": $scope.content,
             "WishUrl": $scope.wishUrl,
             "Picture": $scope.picture
+            
         }
+        //$wishString = JSON.stringify($wish);
 
         console.log("New Wish", $wish);
-        console.log("wish.content", $wish.Content)
+        console.log("wish.content", $wish.Content);
 
         $config_obj = {
             'headers': {
@@ -67,7 +38,7 @@ app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
 
         console.log("$config_obj", $config_obj);
 
-        var data = $wish;
+        
     
         $http.post("/api/Wish", $wish, $config_obj)
             .success(function (data) {
@@ -77,8 +48,14 @@ app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
               
             })
             .error(function (error) { console.log(error.error) });
-  
     }
+
+    $scope.deleteWishes = function () {
+        console.log("Found Delete Btn");
+       
+    }
+
+
 
 
         

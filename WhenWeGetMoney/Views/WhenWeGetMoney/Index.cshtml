@@ -17,7 +17,9 @@
         <div class="col-lg-6 col-lg-offset-3">
             <div class="wish">
                 <div>
-                   <div method="post">
+
+                    <div method="post">
+
                         <div id="addWish">
                             <input ng-model="content" placeholder="Add Wish" />
                         </div>
@@ -28,31 +30,23 @@
                             <input ng-model="picture" placeholder="Add Picture" />
                         </div>
                         <p>
-                            {{content}}, {{wishUrl}}, {{picture}}
+                            {{content}} {{wishUrl}} {{picture}}
                         </p>
                          <button ng-click="createWish()">Save Wish</button>
+                        <button ng-click="deleteWishes()">Delete Selected Wishes</button>
+
                     </div>
                 </div>
 
-                @*<div class="midEntry col-md-4">
-                    <div method="post">
-                        <input ng-model="title" placeholder="Journal Title" />
-                        <textarea ng-model="body"></textarea>
-                    </div>
-                    <p>{{word}}</p>
-                    <button ng-click="test()">Click Me</button>
-                    <button ng-click="createEntry()">Save Journal Entry</button>
-                </div>*@
-
-
-
-
+              
 
                 <table>
                     <tr>
-                        <th class="text-center">Priotiy</th>
+                        <th class="text-center">Priority</th>
                         <th class="text-center">Wish</th>
                         <th class="text-center">Date Added</th>
+                        <th class="text-center">Delete</th>
+
                     </tr>
 
                         @foreach (var Wish in Model)
@@ -61,6 +55,8 @@
                                         <td class="text-center">@Wish.WishPriority</td>
                                         <td class="text-center">@Wish.Content</td>
                                         <td class="text-center">@Wish.Date.ToString("MMM dd yyyy")</td>
+                                        <td class="text-center"><input class="wishDeleteBtn" type="checkbox" /></td>
+
                                     </tr>
                                 }
                   </table>
