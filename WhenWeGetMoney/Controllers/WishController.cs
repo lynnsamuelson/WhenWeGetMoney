@@ -76,11 +76,14 @@ namespace WhenWeGetMoney.Controllers
             string user = User.Identity.GetUserId(); ;
             ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
             Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).SingleOrDefault();
+
+
         }
 
         public void Delete(int id)
         {
-
+            Wish toDelete = Repo.Context.Wishes.FirstOrDefault(u => u.WishId == id);
+            Repo.DeleteWish(toDelete);
         }
     }
 }

@@ -25,17 +25,6 @@ app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
         }
         $wishString = JSON.stringify($wish);
 
-        console.log("New Wish", $wishString);
-        console.log("wish.content", $wish.Content);
-
-        //$config_obj = {
-        //    'headers': {
-        //        'Content-Type': 'application/json',
-        //        'Accept': 'application/json'
-        //    }
-        //}
-
-        //console.log("$config_obj", $config_obj);
 
         $http.post("/api/Wish/", $wishString).then(
                 function (response) { 
@@ -46,23 +35,32 @@ app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
                     console.log("ERRORRRRRR - comments using FROM URI"); 
                 }
                 );
-            }
+     }
+
+    $scope.deleteWish = function (id) {
+
+        //$wishToDelete = {
+        //    "Content": $scope.content,
+        //    "WishUrl": $scope.wishUrl,
+        //    "Picture": $scope.picture
+        //}
+        console.log("found delete", id);
+
+        $http.delete(" /api/Wish/ " + id).then(
+            function (response) { 
+                console.log("Wish Deleted");
+            },
+                function (response) { 
+                    console.log(error)
+                }
+            );
 
 
+           // function (data) { console.log("Wish Deleted"); $window.location.reload(); })
+           //.error(function () { console.log(error); });
+    }
 
 
-    //    $http.post("/api/Wish", $wishString)
-    //        .success(function (data) {
-    //            console.log("Saving Data!", data);
-    //            console.log("wish after post", $wishString);
-    //        })
-    //        .error(function (error) { console.log(error.error) });
-    //}
-
-    //$scope.deleteWishes = function () {
-    //    console.log("Found Delete Btn");
-
-    //}
 
 
 

@@ -33,13 +33,13 @@
                             {{content}} {{wishUrl}} {{picture}}
                         </p>
                          <button ng-click="createWish()">Save Wish</button>
-                        <button ng-click="deleteWishes()">Delete Selected Wishes</button>
+                        @*<button ng-click="deleteWishes()">Delete Selected Wishes</button>*@
 
                     </div>
                 </div>
 
               
-
+                
                 <table>
                     <tr>
                         <th class="text-center">Priority</th>
@@ -52,10 +52,12 @@
                         @foreach (var Wish in Model)
                                 {
                                     <tr>
-                                        <td class="text-center">@Wish.WishPriority</td>
-                                        <td class="text-center">@Wish.Content</td>
-                                        <td class="text-center">@Wish.Date.ToString("MMM dd yyyy")</td>
-                                        <td class="text-center"><input class="wishDeleteBtn" type="checkbox" /></td>
+                                        <td class="text-center wishToDelete">@Wish.WishPriority</td>
+                                        <td class="text-center wishToDelete">@Wish.Content</td>
+                                        <td class="text-center wishToDelete">@Wish.Date.ToString("MMM dd yyyy")</td>
+                                        <td><button ng-click="deleteWish(@Wish.WishId)">Delete Wish</button></td>
+                                        @*<td class="text-center wishToDelete"><button ng-click="deleteWish()">Delete</button></td>*@
+
 
                                     </tr>
                                 }
