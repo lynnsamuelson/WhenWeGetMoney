@@ -1,6 +1,6 @@
 ﻿var app = angular.module('whenwegetmoney', []);
 
-app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
+app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $http, $window) {
 
 
     $scope.deleteUsers = function () {
@@ -13,23 +13,21 @@ app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
         })
     }
 
-
+    
     $scope.createWish = function () {
         console.log("Found Create Wish Btn");
-
         $wish = {
             "Content": $scope.content,
             "WishUrl": $scope.wishUrl,
             "Picture": $scope.picture
-
         }
+
         $wishString = JSON.stringify($wish);
 
-
         $http.post("/api/Wish/", $wishString).then(
-                function (response) { 
-                    console.log("SUCCESS - comments using FROMURI"); 
-                  
+                function (response) {
+                    $window.location.reload();
+                    console.log("SUCCESS - comments using FROMURI");     
                 },
                 function (response) { 
                     console.log("ERRORRRRRR - comments using FROM URI"); 
@@ -38,32 +36,15 @@ app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
      }
 
     $scope.deleteWish = function (id) {
-
-        //$wishToDelete = {
-        //    "Content": $scope.content,
-        //    "WishUrl": $scope.wishUrl,
-        //    "Picture": $scope.picture
-        //}
         console.log("found delete", id);
-
         $http.delete(" /api/Wish/ " + id).then(
-            function (response) { 
+            function (response) {
+                $window.location.reload();
                 console.log("Wish Deleted");
             },
                 function (response) { 
-                    console.log(error)
+                    console.log(error);
                 }
             );
-
-
-           // function (data) { console.log("Wish Deleted"); $window.location.reload(); })
-           //.error(function () { console.log(error); });
     }
-
-
-
-
-
-
-
 }]);
