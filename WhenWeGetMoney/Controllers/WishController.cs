@@ -43,7 +43,7 @@ namespace WhenWeGetMoney.Controllers
         }
 
         // POST: api/Wish
-        public HttpResponseMessage Post([FromBody]string new_Wish)
+        public HttpResponseMessage Post(Wish new_Wish)
         {
             string user = User.Identity.GetUserId();
             ApplicationUser new_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
@@ -52,12 +52,10 @@ namespace WhenWeGetMoney.Controllers
             {
 
             }
-            //var query = from u in Repo.Context.Families where u.FamilyUserID == user.FamilyUserID select u;
-            //Family found_user = query.SingleOrDefault<Family>();
-
+           
             if (me != null)
             {
-                // Repo.CreateWish(me, new_Wish.Content, new_Wish.Picture, new_Wish.WishUrl);
+                 Repo.CreateWish(me, new_Wish.Content, new_Wish.Picture, new_Wish.WishUrl);
             }
                 return new HttpResponseMessage(HttpStatusCode.OK);
 

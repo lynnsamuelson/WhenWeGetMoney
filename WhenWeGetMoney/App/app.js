@@ -21,10 +21,10 @@ app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
         $wish = {
             "Content": $scope.content,
             "WishUrl": $scope.wishUrl,
-            "Picture": $scope.picture,
-            "WishId": 99
+            "Picture": $scope.picture
+            
         }
-        $wishString = JSON.stringify($wish);
+        //$wishString = JSON.stringify($wish);
 
         console.log("New Wish", $wish);
         console.log("wish.content", $wish.Content);
@@ -40,7 +40,7 @@ app.controller('Controller', ["$scope", "$http", function ($scope, $http) {
 
         
     
-        $http.post("/api/Wish", $wishString, $config_obj)
+        $http.post("/api/Wish", $wish, $config_obj)
             .success(function (data) {
                 console.log("Saving Data!", data);
                 console.log("wish after post", $wish);
