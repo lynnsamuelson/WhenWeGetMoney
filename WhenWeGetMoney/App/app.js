@@ -33,6 +33,17 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
 
         //$familyString = JSON.stringify($family)
 
+        $http.post("/api/MoneyPot/", $familyMoney).then(
+                function (response) {
+                    //$window.loctaion.reload();
+                    console.log("Created a MoneyPot for the Family");
+                    console.log("response", response);
+                },
+                function (response) {
+                    console.log("Error creating MoneyPot");
+                });
+
+
         if ($familyName[0] == undefined) {
             //create family method
             $http.post("/api/Family/", $familyString).then(
@@ -45,14 +56,7 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
                     }
                     );
 
-            $http.post("/api/MoneyPot/", $familymoney).then(
-                function (response) {
-                    //$window.loctaion.reload();
-                    console.log("Created a MoneyPot for the Family");
-                },
-                function (response) {
-                    console.log("Error creating MoneyPot");
-                });
+            
 
         } else {
             //update family method

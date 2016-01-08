@@ -40,7 +40,7 @@ namespace WhenWeGetMoney.Controllers
         {
             string user = User.Identity.GetUserId();
             ApplicationUser new_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
-            //Repo.CreateMoneyPot(new_user, amount);
+            Repo.CreateMoneyPot(amount);
         }
 
         // PUT: api/MoneyPot/5

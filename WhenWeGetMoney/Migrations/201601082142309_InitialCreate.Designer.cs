@@ -13,7 +13,7 @@ namespace WhenWeGetMoney.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201601042215504_InitialCreate"; }
+            get { return "201601082142309_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

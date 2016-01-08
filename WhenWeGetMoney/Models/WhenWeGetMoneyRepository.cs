@@ -90,14 +90,18 @@ namespace WhenWeGetMoney.Models
                 var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
                 Family found_user = query.SingleOrDefault<Family>();
 
-                var moneyQuery = from money in _context.MoneyPots where money.MoneyPotId == found_user.money.MoneyPotId select money;
-                MoneyPot familyMoney = moneyQuery.SingleOrDefault();
-
-                if (found_user == null)
+                if (found_user.money == null)
                 {
-                    return new MoneyPot() {  DollarAmount = 0.0m  };
+                    MoneyPot newFamilyMoney = new MoneyPot() {  DollarAmount = 0.0m  };
+                    return newFamilyMoney;
+                } else
+                {
+                    var moneyQuery = from money in _context.MoneyPots where money.MoneyPotId == found_user.money.MoneyPotId select money;
+                    MoneyPot familyMoney = moneyQuery.SingleOrDefault();
+                    return familyMoney;
+
                 }
-                return familyMoney;
+
             }
             else
             {
