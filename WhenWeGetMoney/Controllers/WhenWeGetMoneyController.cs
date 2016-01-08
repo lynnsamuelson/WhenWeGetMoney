@@ -31,8 +31,7 @@ namespace WhenWeGetMoney.Controllers
             string user_id = User.Identity.GetUserId(); 
             Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
 
-            MoneyPot amount = Repo.GetFamilyMoney(me);
-            ViewBag.Amount = amount.DollarAmount;
+            
 
             if (me == null)
             {
@@ -40,6 +39,7 @@ namespace WhenWeGetMoney.Controllers
 
             }
 
+            ViewBag.Amount = me.DollarAmount;
             List<Wish> my_wishes = Repo.GetFamilyWishes(me);
             return View(my_wishes);
 
@@ -63,8 +63,7 @@ namespace WhenWeGetMoney.Controllers
 
             Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
 
-            MoneyPot amount = Repo.GetFamilyMoney(me);
-            ViewBag.Amount = amount.DollarAmount;
+            ViewBag.Amount = me.DollarAmount;
             return View();
         }
 
@@ -74,12 +73,12 @@ namespace WhenWeGetMoney.Controllers
             string user_id = User.Identity.GetUserId();
             Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
 
-            MoneyPot amount = Repo.GetFamilyMoney(me);
-            ViewBag.Amount = amount.DollarAmount;
+            
             if (me != null)
             {
                 ViewBag.Name = me.FamilyName;
                 ViewBag.Type = me.TypeOfFamily;
+                ViewBag.Amount = me.DollarAmount;
 
             }
             return View();
@@ -92,8 +91,7 @@ namespace WhenWeGetMoney.Controllers
             string user_id = User.Identity.GetUserId();
             Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
 
-            MoneyPot amount = Repo.GetFamilyMoney(me);
-            ViewBag.Amount = amount.DollarAmount;
+            ViewBag.Amount = me.DollarAmount;
 
             return View();
         }

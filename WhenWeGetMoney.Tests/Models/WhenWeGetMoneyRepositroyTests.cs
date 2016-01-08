@@ -17,7 +17,6 @@ namespace WhenWeGetMoney.Tests.Models
         private Mock<WhenWeGetMoneyContext> mock_context;
         private Mock<DbSet<Family>> mock_family_set;
         private Mock<DbSet<Wish>> mock_wish_set;
-        private Mock<DbSet<MoneyPot>> mock_moneyPot_set;
         private ApplicationUser test_user;
 
         private WhenWeGetMoneyRepository repository;
@@ -46,17 +45,7 @@ namespace WhenWeGetMoney.Tests.Models
             mock_context.Setup(a => a.Wishes).Returns(mock_wish_set.Object);
         }
 
-        private void ConnectMocksToDataStore(IEnumerable<MoneyPot> data_store)
-        {
-            var data_source = data_store.AsQueryable<MoneyPot>();
-
-            mock_moneyPot_set.As<IQueryable<MoneyPot>>().Setup(data => data.Provider).Returns(data_source.Provider);
-            mock_moneyPot_set.As<IQueryable<MoneyPot>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            mock_moneyPot_set.As<IQueryable<MoneyPot>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            mock_moneyPot_set.As<IQueryable<MoneyPot>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
-
-            mock_context.Setup(a => a.MoneyPots).Returns(mock_moneyPot_set.Object);
-        }
+        
         [TestInitialize]
         public void Initialize()
         {
@@ -64,7 +53,6 @@ namespace WhenWeGetMoney.Tests.Models
             mock_family_set = new Mock<DbSet<Family>>();
             mock_wish_set = new Mock<DbSet<Wish>>();
             mock_wish_set = new Mock<DbSet<Wish>>();
-            mock_moneyPot_set = new Mock<DbSet<MoneyPot>>();
             repository = new WhenWeGetMoneyRepository(mock_context.Object);
             test_user = new ApplicationUser { Email = "test5@example.com", Id = "myid-whoo" };
         }
@@ -77,7 +65,6 @@ namespace WhenWeGetMoney.Tests.Models
             mock_context = null;
             mock_family_set = null;
             mock_wish_set = null;
-            mock_moneyPot_set = null;
             repository = null;
         }
 
@@ -289,43 +276,7 @@ namespace WhenWeGetMoney.Tests.Models
             //Assert.IsTrue(successful);
         }
 
-        [TestMethod]
-        public void WhenWeGetMoneyEnsureICanGetAllMoneyPots()
-        {
-            //Arrange
-            List<MoneyPot> expected = new List<MoneyPot>
-            {
-                new MoneyPot { MoneyPotId = 1 },
-                new MoneyPot { MoneyPotId = 2 }
-            };
-            mock_moneyPot_set.Object.AddRange(expected);
-            ConnectMocksToDataStore(expected);
-
-            //Act
-            List<MoneyPot> actual = repository.GetAllMoneyPots();
-
-            //Assert
-            Assert.AreEqual(1, actual.First().MoneyPotId);
-            CollectionAssert.AreEqual(expected, actual);
-        }
-
-        //[TestMethod]
-        //public void WhenWeGetMoneyEnsureICanCreateAMoneyPot()
-        //{
-        //    // Arrange
-        //    DateTime base_time = DateTime.Now;
-        //    List<MoneyPot> expected_money = new List<MoneyPot>(); // This is our database
-        //    ConnectMocksToDataStore(expected_money);
-        //    Family Family1 = new Family { FamilyName = "Rice" };
-        //    decimal dollarAmount = 1001.75m;
-        //    mock_moneyPot_set.Setup(j => j.Add(It.IsAny<MoneyPot>())).Callback((MoneyPot s) => expected_money.Add(s));
-        //    // Act
-        //    MoneyPot successful = repository.CreateMoneyPot(dollarAmount);
-
-        //    // Assert
-        //    Assert.AreEqual(1, repository.GetAllMoneyPots().Count);
-
-        //}
+       
 
         [TestMethod]
         public void WhenWeGetMoneyRepositoyEnsureICanCreateAFamily()
@@ -334,11 +285,11 @@ namespace WhenWeGetMoney.Tests.Models
             List<Family> family_user_data_source = new List<Family>();
             ConnectMocksToDataStore(family_user_data_source);
             string user_familyname = "Anderson";
-            string user_money = "0";
+            decimal user_money = 0;
             mock_family_set.Setup(j => j.Add(It.IsAny<Family>())).Callback((Family s) => family_user_data_source.Add(s));
 
             //Act
-            bool successful = repository.CreateFamily(test_user, user_familyname);
+            bool successful = repository.CreateFamily(test_user, user_familyname, user_money);
 
             //Assert
             Family family_user = repository.GetAllFamilies().Where(u => u.RealUser.Id == test_user.Id).SingleOrDefault();
@@ -361,12 +312,12 @@ namespace WhenWeGetMoney.Tests.Models
             ConnectMocksToDataStore(family_user_data_source);
             //string user_id = User.Identity.GetUserId();
             string user_FamilyName = "Anderson";
-            string user_money = "0";
-            // Forces DbSet.Add to behave like List.Add
+            decimal user_money = 0;
+            // Forces .DbSetd to behave like List.Add
             mock_family_set.Setup(j => j.Add(It.IsAny<Family>())).Callback((Family s) => family_user_data_source.Add(s));
 
             // Act
-            bool successful = repository.CreateFamily(test_user, user_FamilyName);
+            bool successful = repository.CreateFamily(test_user, user_FamilyName, user_money);
 
             // Assert
             Assert.IsFalse(successful);

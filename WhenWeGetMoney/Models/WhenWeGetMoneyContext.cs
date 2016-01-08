@@ -10,6 +10,5 @@ namespace WhenWeGetMoney.Models
     {
         public virtual DbSet<Family> Families { get; set; }
         public virtual DbSet<Wish> Wishes { get; set; }
-        public virtual DbSet<MoneyPot> MoneyPots { get; set; }
     }
 }

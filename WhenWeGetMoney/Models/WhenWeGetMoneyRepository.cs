@@ -35,11 +35,7 @@ namespace WhenWeGetMoney.Models
             return query.ToList();
         }
 
-        public List<MoneyPot> GetAllMoneyPots()
-        {
-            var query = from MoneyPot in _context.MoneyPots select MoneyPot;
-            return query.ToList();
-        }
+        
 
         public Family GetFamilyByName(string FamilyName)
         {
@@ -82,34 +78,8 @@ namespace WhenWeGetMoney.Models
             }
         }
 
-        public MoneyPot GetFamilyMoney(Family user)
-        {
+      
 
-            if (user != null)
-            {
-                var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
-                Family found_user = query.SingleOrDefault<Family>();
-
-                if (found_user.money == null)
-                {
-                    MoneyPot newFamilyMoney = new MoneyPot() {  DollarAmount = 0.0m  };
-                    return newFamilyMoney;
-                } else
-                {
-                    var moneyQuery = from money in _context.MoneyPots where money.MoneyPotId == found_user.money.MoneyPotId select money;
-                    MoneyPot familyMoney = moneyQuery.SingleOrDefault();
-                    return familyMoney;
-
-                }
-
-            }
-            else
-            {
-                return new MoneyPot()  { DollarAmount = 0.01m };
-
-            }
-            //return new MoneyPot() { DollarAmount = 0.0m };
-        }
 
 
         public void DeleteAllUsers()
@@ -168,34 +138,17 @@ namespace WhenWeGetMoney.Models
             return is_added;
         }
 
-        public MoneyPot CreateMoneyPot( string amount)
-        {
-            decimal dollarAmount = 0;
-            dollarAmount = System.Convert.ToDecimal(amount);
-            MoneyPot a_dollars = new MoneyPot { DollarAmount = dollarAmount, DateUpdated = DateTime.Now };
-            //bool is_added = true;
-           // try
-           // {
-                MoneyPot added_dollars = _context.MoneyPots.Add(a_dollars);
-                _context.SaveChanges();
-               return added_dollars;
-               
-           // }
-           // catch (Exception)
-           // {
-               // is_added = false;
-          //  }
-            //return is_added;
-        }
+       
 
-        public bool CreateFamily(ApplicationUser app_user, string familyName)
-        {
-            
+        public bool CreateFamily(ApplicationUser app_user, string familyName, decimal dollarAmount)
+        { 
+            decimal decimalAmount = System.Convert.ToDecimal(dollarAmount);
+
 
             bool handle_is_available = this.IsFamilyNameAvailable(familyName);
             if (handle_is_available)
             {
-                Family new_user = new Family { RealUser = app_user, FamilyName = familyName };
+                Family new_user = new Family { RealUser = app_user, FamilyName = familyName, DollarAmount = decimalAmount, MoneyUpdated = DateTime.Now };
                
                 bool is_added = true;
                 try

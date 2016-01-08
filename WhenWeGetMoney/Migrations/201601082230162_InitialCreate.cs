@@ -14,24 +14,13 @@ namespace WhenWeGetMoney.Migrations
                         FamilyUserID = c.Int(nullable: false, identity: true),
                         FamilyName = c.String(nullable: false),
                         TypeOfFamily = c.Int(nullable: false),
-                        money_MoneyPotId = c.Int(),
+                        DollarAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        MoneyUpdated = c.DateTime(nullable: false),
                         RealUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.FamilyUserID)
-                .ForeignKey("dbo.MoneyPots", t => t.money_MoneyPotId)
                 .ForeignKey("dbo.AspNetUsers", t => t.RealUser_Id)
-                .Index(t => t.money_MoneyPotId)
                 .Index(t => t.RealUser_Id);
-            
-            CreateTable(
-                "dbo.MoneyPots",
-                c => new
-                    {
-                        MoneyPotId = c.Int(nullable: false, identity: true),
-                        DollarAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        DateUpdated = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.MoneyPotId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -128,7 +117,6 @@ namespace WhenWeGetMoney.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Families", "money_MoneyPotId", "dbo.MoneyPots");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Wishes", new[] { "Author_FamilyUserID" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
@@ -137,14 +125,12 @@ namespace WhenWeGetMoney.Migrations
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Families", new[] { "RealUser_Id" });
-            DropIndex("dbo.Families", new[] { "money_MoneyPotId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Wishes");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.MoneyPots");
             DropTable("dbo.Families");
         }
     }

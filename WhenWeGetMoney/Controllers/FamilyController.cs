@@ -37,11 +37,12 @@ namespace WhenWeGetMoney.Controllers
         // POST: api/Family
         [System.Web.Http.Route("api/Family/")]
         [System.Web.Http.HttpPost]
-        public void Post([FromBody]string familyName)
+        public void Post([FromBody]Family familyName)
         {
             string user = User.Identity.GetUserId();
             ApplicationUser new_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
-            Repo.CreateFamily(new_user, familyName);
+
+            Repo.CreateFamily(new_user, familyName.FamilyName, familyName.DollarAmount);
         }
 
         // PUT: api/Family/5

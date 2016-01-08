@@ -133,7 +133,6 @@
     <Compile Include="Controllers\TestControllerTests.cs" />
     <Compile Include="Controllers\WishControllerTests.cs" />
     <Compile Include="Models\FamilyTests.cs" />
-    <Compile Include="Models\MoneyPotTests.cs" />
     <Compile Include="Models\WhenWeGetMoneyRepositroyTests.cs" />
     <Compile Include="Models\WishTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

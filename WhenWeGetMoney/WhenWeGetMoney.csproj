@@ -188,16 +188,15 @@
     <Compile Include="Controllers\FamilyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MoneyPotController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\WhenWeGetMoneyController.cs" />
     <Compile Include="Controllers\WishController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601082142309_InitialCreate.cs" />
-    <Compile Include="Migrations\201601082142309_InitialCreate.Designer.cs">
-      <DependentUpon>201601082142309_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201601082230162_InitialCreate.cs" />
+    <Compile Include="Migrations\201601082230162_InitialCreate.Designer.cs">
+      <DependentUpon>201601082230162_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -205,7 +204,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\keyAttribute.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MoneyPot.cs" />
     <Compile Include="Models\WhenWeGetMoneyContext.cs" />
     <Compile Include="Models\WhenWeGetMoneyRepository.cs" />
     <Compile Include="Models\Wish.cs" />
@@ -1074,8 +1072,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601082142309_InitialCreate.resx">
-      <DependentUpon>201601082142309_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601082230162_InitialCreate.resx">
+      <DependentUpon>201601082230162_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
