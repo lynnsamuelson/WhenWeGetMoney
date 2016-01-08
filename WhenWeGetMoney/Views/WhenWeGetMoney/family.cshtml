@@ -22,9 +22,12 @@
                 <div >
                     <input ng-model="content" id="addFamilyName" placeholder="Family Name" />
                 </div>
+                <div>
+                    <input ng-model="money" id="addDollarAmount" placeholder="Savings Amount" />
+                </div>
 
                 <p>
-                    {{content}}
+                    {{content}} {{money}}
                 </p>
                 <button ng-click="createOrUpdateFamily()">Save Family</button>
             </div>

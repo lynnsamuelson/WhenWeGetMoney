@@ -50,8 +50,8 @@ namespace WhenWeGetMoney.Models
 
         public Family GetFamilyById(string FamilyUserID)
         {
-            int numbId = Int32.Parse(FamilyUserID);
-            var query = from u in _context.Families where u.FamilyUserID == numbId select u;
+            //int numbId = Int32.Parse(FamilyUserID);
+            var query = from u in _context.Families where u.RealUser.Id == FamilyUserID select u;
             return query.SingleOrDefault();
         }
 
@@ -164,29 +164,35 @@ namespace WhenWeGetMoney.Models
             return is_added;
         }
 
-        public bool CreateMoneyPot(Family family1, decimal dollarAmount)
+        public MoneyPot CreateMoneyPot( string amount)
         {
+            decimal dollarAmount = 0;
+            dollarAmount = System.Convert.ToDecimal(amount);
             MoneyPot a_dollars = new MoneyPot { DollarAmount = dollarAmount, DateUpdated = DateTime.Now };
-            bool is_added = true;
-            try
-            {
+            //bool is_added = true;
+           // try
+           // {
                 MoneyPot added_dollars = _context.MoneyPots.Add(a_dollars);
                 _context.SaveChanges();
+               return added_dollars;
                
-            }
-            catch (Exception)
-            {
-                is_added = false;
-            }
-            return is_added;
+           // }
+           // catch (Exception)
+           // {
+               // is_added = false;
+          //  }
+            //return is_added;
         }
 
-        public bool CreateFamily(ApplicationUser app_user, string new_FamilyName)
+        public bool CreateFamily(ApplicationUser app_user, string familyName)
         {
-            bool handle_is_available = this.IsFamilyNameAvailable(new_FamilyName);
+            
+
+            bool handle_is_available = this.IsFamilyNameAvailable(familyName);
             if (handle_is_available)
             {
-                Family new_user = new Family { RealUser = app_user, FamilyName = new_FamilyName };
+                Family new_user = new Family { RealUser = app_user, FamilyName = familyName };
+               
                 bool is_added = true;
                 try
                 {

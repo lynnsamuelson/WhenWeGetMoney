@@ -22,10 +22,16 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
         $familyString  = JSON.stringify($scope.content);
         console.log("$familyString", $familyString);
 
+        $familyMoney = JSON.stringify($scope.money);
+        console.log("familyMoney", $familyMoney);
 
-        //$familyObj = { "FamilyName": $familyName[0] }
-        //console.log("familyObj", $familyObj);
-        //$familyNameString = JSONStringify($familyObj);
+        //$family = {
+        //    "Content": $scope.content,
+        //    "money": $scope.money,
+        //}
+        //console.log("Family Obj", $family);
+
+        //$familyString = JSON.stringify($family)
 
         if ($familyName[0] == undefined) {
             //create family method
@@ -38,6 +44,16 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
                         console.log("Error creating family");
                     }
                     );
+
+            $http.post("/api/MoneyPot/", $familymoney).then(
+                function (response) {
+                    //$window.loctaion.reload();
+                    console.log("Created a MoneyPot for the Family");
+                },
+                function (response) {
+                    console.log("Error creating MoneyPot");
+                });
+
         } else {
             //update family method
             $http.put("/api/Family/", $familyName[0]).then(
