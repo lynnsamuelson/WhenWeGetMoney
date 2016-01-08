@@ -29,11 +29,7 @@ namespace WhenWeGetMoney.Controllers
         // GET: api/Wish
         public List<Wish> Get()
         {
-            //Family familyId = Repo.GetFamilyById(1);
-            //return  Repo.GetFamilyWishes(familyId);
-
             return Repo.GetAllWishes();
-
         }
 
         // GET: api/Wish/5
@@ -51,7 +47,6 @@ namespace WhenWeGetMoney.Controllers
             ApplicationUser new_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
             Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).SingleOrDefault();
 
-           // Wish new_wish = new Wish { Author = me, Content = newWish.Content, Picture = newWish.Picture, WishUrl = newWish.WishUrl, Date = DateTime.Now, BoughtIt = false };
             if(ModelState.IsValid)
             {
 
@@ -61,7 +56,6 @@ namespace WhenWeGetMoney.Controllers
             {
                  Repo.CreateWish(me, newWish.Content, newWish.Picture, newWish.WishUrl);
             }
-                //return new HttpResponseMessage(HttpStatusCode.OK);
 
         }
 

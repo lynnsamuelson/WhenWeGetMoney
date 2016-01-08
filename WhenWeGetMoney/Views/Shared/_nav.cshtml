@@ -15,13 +15,16 @@
                     {
                         <li>@Html.ActionLink("Wish List", "Index", "WhenWeGetMoney")</li>
                         <li>@Html.ActionLink("Bought It", "boughtIt", "WhenWeGetMoney")</li>
-                        <li>@Html.ActionLink("$ Pot", "moneyPot", "WhenWeGetMoney")</li>
+                        <li>@Html.ActionLink("Money", "moneyPot", "WhenWeGetMoney")</li>
+                        <li>@Html.ActionLink("Profile", "family", "WhenWeGetMoney")</li>
+
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Account")</li>
+
+
                     }
 
 

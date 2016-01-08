@@ -28,17 +28,18 @@ namespace WhenWeGetMoney.Controllers
         public ActionResult Index()
         {
 
-           
-            //string user_id = User.Identity.GetUserId();
-
-            //Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
-           
-            //List<Wish> my_wishes = Repo.GetFamilyWishes(me);
-            //return View(my_wishes);
-
-            string user_id = User.Identity.GetUserId(); //is in the e-mail account
-
+            string user_id = User.Identity.GetUserId(); 
             Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+
+            MoneyPot amount = Repo.GetFamilyMoney(me);
+            ViewBag.Amount = amount.DollarAmount;
+
+            if (me == null)
+            {
+                return RedirectToAction("family");
+
+            }
+
             List<Wish> my_wishes = Repo.GetFamilyWishes(me);
             return View(my_wishes);
 
@@ -67,8 +68,33 @@ namespace WhenWeGetMoney.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult family()
+        {
+            string user_id = User.Identity.GetUserId();
+            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+
+            MoneyPot amount = Repo.GetFamilyMoney(me);
+            ViewBag.Amount = amount.DollarAmount;
+            if (me != null)
+            {
+                ViewBag.Name = me.FamilyName;
+                ViewBag.Type = me.TypeOfFamily;
+
+            }
+            return View();
+        }
+
+
+
         public ActionResult boughtIt()
         {
+            string user_id = User.Identity.GetUserId();
+            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+
+            MoneyPot amount = Repo.GetFamilyMoney(me);
+            ViewBag.Amount = amount.DollarAmount;
+
             return View();
         }
 
