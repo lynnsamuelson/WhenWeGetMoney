@@ -86,6 +86,7 @@ namespace WhenWeGetMoney.Migrations
                     {
                         WishId = c.Int(nullable: false, identity: true),
                         Content = c.String(maxLength: 75),
+                        Cost = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Date = c.DateTime(nullable: false),
                         WishPriority = c.Int(nullable: false),
                         Picture = c.String(),

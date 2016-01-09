@@ -54,12 +54,14 @@ namespace WhenWeGetMoney.Controllers
            
             if (me != null)
             {
-                 Repo.CreateWish(me, newWish.Content, newWish.Picture, newWish.WishUrl);
+                string itemCost = newWish.Cost.ToString();
+                 Repo.CreateWish(me, newWish.Content, itemCost);
             }
 
         }
 
         // PUT: api/Wish/5
+
         public void Put(int id, [FromBody]string value)
         {
         }

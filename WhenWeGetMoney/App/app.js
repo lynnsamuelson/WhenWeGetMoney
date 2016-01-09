@@ -19,12 +19,6 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
         console.log("$familyName", $familyName);
         console.log("family name[0]", $familyName[0]);
 
-        //$familyString = JSON.stringify($scope.FamilyName);
-        //console.log("$familyString", $familyString);
-
-        //$familyMoney = JSON.stringify($scope.DollarAmount);
-        //console.log("familyMoney", $familyMoney);
-
         $family = {
             "FamilyName": $scope.FamilyName,
             "DollarAmount": $scope.DollarAmount,
@@ -46,16 +40,14 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
                     function (response) {
                         console.log("Error creating family");
                     }
-                    );
-
-            
+                    );           
 
         } else {
             //update family method
-            $http.put("/api/Family/", $familyName[0]).then(
+            $http.put("/api/Family/", $familyString).then(
                     function (response) {
-                       // $window.location.reload();
-                        console.log("Updated Family Name");
+                        $window.location.reload();
+                        console.log("Updated Family");
                     },
                     function (response) {
                         console.log("error updateding family");
@@ -69,8 +61,8 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
         console.log("Found Create Wish Btn");
         $wish = {
             "Content": $scope.content,
-            "WishUrl": $scope.wishUrl,
-            "Picture": $scope.picture
+            "Cost": $scope.cost,
+           
         }
 
         $wishString = JSON.stringify($wish);

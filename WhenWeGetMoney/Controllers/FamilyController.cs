@@ -48,12 +48,13 @@ namespace WhenWeGetMoney.Controllers
         // PUT: api/Family/5
         [System.Web.Http.Route("api/Family/")]
         [System.Web.Http.HttpPut]
-        public void Put([FromBody]Family newFamily)
+        public void Put([FromBody]Family updateFamily)
         {
             string user = User.Identity.GetUserId();
-            ApplicationUser new_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
-            //Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).SingleOrDefault();
-            //Repo.CreateFamily(new_user, newFamily.FamilyName);
+            ApplicationUser app_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
+            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).SingleOrDefault();
+
+            Repo.UpdateFamily(app_user, me, updateFamily.FamilyName, updateFamily.DollarAmount);
 
         }
 

@@ -266,14 +266,14 @@ namespace WhenWeGetMoney.Tests.Models
             string content = "Spring Training";
             string picture = "baseball";
             string url = "www.baseball.com";
+            string cost = "200";
             mock_wish_set.Setup(j => j.Add(It.IsAny<Wish>())).Callback((Wish s) => expected_wishes.Add(s));
             // Act
-            bool successful = repository.CreateWish(Family1, content, picture, url);
+            bool successful = repository.CreateWish(Family1, content, cost );
 
             // Assert
             Assert.AreEqual(1, repository.GetAllWishes().Count);
-            // Should this return true?
-            //Assert.IsTrue(successful);
+          
         }
 
        

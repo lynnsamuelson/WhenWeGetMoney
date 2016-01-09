@@ -28,22 +28,30 @@ namespace WhenWeGetMoney.Controllers
         public ActionResult Index()
         {
 
-            string user_id = User.Identity.GetUserId(); 
-            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
-
-            
-
-            if (me == null)
+            string user_id = User.Identity.GetUserId();
+        
+            if (user_id == null)
             {
                 return RedirectToAction("family");
+            } else
+            {
+                Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+
+                if (me == null)
+                {
+                    return RedirectToAction("family");
+                }
+
+                ViewBag.Amount = me.DollarAmount;
+                List<Wish> my_wishes = Repo.GetFamilyWishes(me);
+                return View(my_wishes);
 
             }
 
-            ViewBag.Amount = me.DollarAmount;
-            List<Wish> my_wishes = Repo.GetFamilyWishes(me);
-            return View(my_wishes);
 
-            }
+
+
+        }
 
         [Authorize]
         public ActionResult WishFeed()

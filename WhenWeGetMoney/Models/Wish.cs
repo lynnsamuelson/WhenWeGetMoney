@@ -18,6 +18,7 @@ namespace WhenWeGetMoney.Models
         [MaxLength(75)]
         [MinLength(1)]
         public string Content { get; set; }
+        public decimal Cost { get; set; }
         public DateTime Date { get; set; }
         [key]
         public int WishId { get; set; }

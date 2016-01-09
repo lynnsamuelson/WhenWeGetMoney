@@ -6,11 +6,11 @@ using System.Web;
 
 namespace WhenWeGetMoney.Models
 {
-    public class WhenWeGetMoneyRepository 
+    public class WhenWeGetMoneyRepository
     {
 
         private WhenWeGetMoneyContext _context;
-        public WhenWeGetMoneyContext Context { get  { return _context; } }
+        public WhenWeGetMoneyContext Context { get { return _context; } }
 
         public WhenWeGetMoneyRepository()
         {
@@ -35,11 +35,11 @@ namespace WhenWeGetMoney.Models
             return query.ToList();
         }
 
-        
+
 
         public Family GetFamilyByName(string FamilyName)
         {
-           
+
             var query = from family in _context.Families where family.FamilyName == FamilyName select family;
             return query.SingleOrDefault();
         }
@@ -78,8 +78,34 @@ namespace WhenWeGetMoney.Models
             }
         }
 
-      
-
+        internal bool UpdateFamily(ApplicationUser app_user, Family me, string familyName, decimal dollarAmount)
+        {
+            bool is_added = true;
+            try
+            {
+                if (familyName != null)
+                {
+                    me.FamilyName = familyName;
+                    _context.SaveChanges();
+                }
+                if (dollarAmount != 0m)
+                {
+                    me.DollarAmount = dollarAmount;
+                    _context.SaveChanges();
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                is_added = false;
+            }
+            catch (InvalidOperationException)
+            {
+                is_added = false;
+            }
+            return is_added;
+        }
+       
+        
 
 
         public void DeleteAllUsers()
@@ -121,9 +147,10 @@ namespace WhenWeGetMoney.Models
             return found_users;
         }
 
-        public bool CreateWish(Family family1, string content, string picture, string wishUrl)
+        public bool CreateWish(Family family1, string content, string cost)
         {
-            Wish a_wish = new Wish { Content = content, Date = DateTime.Now, Author = family1, Picture = picture, WishUrl = wishUrl };
+            decimal itemCost = System.Convert.ToDecimal(cost);
+            Wish a_wish = new Wish { Content = content, Date = DateTime.Now, Author = family1, Cost = itemCost, BoughtIt = false };
             bool is_added = true;
             try
             {
