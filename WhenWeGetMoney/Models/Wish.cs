@@ -13,7 +13,6 @@ namespace WhenWeGetMoney.Models
     [Serializable]
     public class Wish 
     {
-       
         public virtual Family Author { get; set; }
         [MaxLength(75)]
         [MinLength(1)]
@@ -26,8 +25,6 @@ namespace WhenWeGetMoney.Models
         public string Picture { get; set; }
         public string WishUrl { get; set; }
         public bool BoughtIt { get; set; }
-
-       
 
     }
 }

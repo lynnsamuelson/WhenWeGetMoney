@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@model IEnumerable<WhenWeGetMoney.Models.MoneyPot>
+@model IEnumerable<WhenWeGetMoney.Models.Family>
 
 
 
@@ -11,21 +11,19 @@
 
 
     <h1>Available $</h1>
+    <h3 id="familyName">@ViewBag.Name</h3>
 
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
             <div class="MoneyPot">
-                <div>@ViewBag.Amount</div>
-                
-                @*<table>
-
-                    @foreach (var Pot in Model)
-                    {
-                        <tr>
-                            <td class="text-center">@Pot.DollarAmount</td>
-                    </tr>
-                    }
-                </table>*@
+                <div id="currentBalance">@ViewBag.Amount</div>
+                <div>
+                    <input ng-model="DollarAmount" id="addDollarAmount" placeholder="Amount" />
+                </div>
+                {{DollarAmount}}
+                <button ng-click="createOrUpdateFamily()">Update Amount</button>
+                <button ng-click="addMoneyToFamily()">Add</button>
+                <button ng-click="subtractMoneyFromFamily()">Subtract</button>
             </div>
         </div>
     </div>

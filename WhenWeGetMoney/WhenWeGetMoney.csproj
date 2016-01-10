@@ -1060,6 +1060,7 @@
     <Content Include="Views\WhenWeGetMoney\Admin.cshtml" />
     <Content Include="Views\Shared\_Dollar.cshtml" />
     <Content Include="Views\WhenWeGetMoney\family.cshtml" />
+    <Content Include="Views\Shared\_Bought.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -53,16 +53,13 @@ namespace WhenWeGetMoney.Models
 
         public List<Wish> GetFamilyWishes(Family user)
         {
-            //var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
-            //Family found_user = query.Single<Family>();
-            //return found_user.Wishes.ToList();
 
             if (user != null)
             {
                 var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
                 Family found_user = query.SingleOrDefault<Family>();
 
-                var wishQuery = from wish in _context.Wishes where wish.Author.FamilyUserID == user.FamilyUserID select wish;
+                var wishQuery = from wish in _context.Wishes where wish.Author.FamilyUserID == user.FamilyUserID && wish.BoughtIt == false select wish;
                 var familyWishes = wishQuery.ToList();
 
                 if (found_user == null)
@@ -74,6 +71,30 @@ namespace WhenWeGetMoney.Models
             else
             {
                 return new List<Wish> { new Wish() { Content = "found_user is in else" } };
+
+            }
+        }
+
+        public List<Wish> GetFamilyBoughtWishes(Family user)
+        {
+
+            if (user != null)
+            {
+                var query = from u in _context.Families where u.FamilyUserID == user.FamilyUserID select u;
+                Family found_user = query.SingleOrDefault<Family>();
+
+                var wishQuery = from wish in _context.Wishes where wish.Author.FamilyUserID == user.FamilyUserID && wish.BoughtIt == true select wish;
+                var familyWishes = wishQuery.ToList();
+
+                if (found_user == null)
+                {
+                    return new List<Wish> { new Wish() { Content = "Family not found" } };
+                }
+                return familyWishes;
+            }
+            else
+            {
+                return new List<Wish> { new Wish() { Content = "Application User not found" } };
 
             }
         }
@@ -104,8 +125,26 @@ namespace WhenWeGetMoney.Models
             }
             return is_added;
         }
-       
-        
+
+        internal bool BoughtWish(Wish toBuy)
+        {
+            bool is_added = true;
+            try
+            {
+                toBuy.BoughtIt = true;
+                _context.SaveChanges();
+               
+            }
+            catch (ArgumentNullException)
+            {
+                is_added = false;
+            }
+           
+            return is_added;
+
+        }
+
+
 
 
         public void DeleteAllUsers()

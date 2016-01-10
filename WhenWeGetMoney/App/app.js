@@ -2,16 +2,67 @@
 
 app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $http, $window) {
 
-
-    $scope.deleteUsers = function () {
-        $http.delete("/api/Test")
-        .success(function (data) {
-            alert("Deleting Users Yay!");
-        })
-        .error(function (error) {
-            alert(error.error);
-        })
+    $scope.boughtWishes = function () {
+        console.log("bought Wishes")
     }
+
+
+    $scope.addMoneyToFamily = function () {
+        $CurrentBalance = $("#currentBalance").text();
+        $oldBalance = parseFloat($CurrentBalance);
+        $AmountToAdd = $scope.DollarAmount;
+        $toAdd = parseFloat($AmountToAdd);
+        $totalMoneyPot = $oldBalance + $toAdd;
+        console.log("total Money Pot", $totalMoneyPot);
+
+        $MoneyUpdate = {
+            "DollarAmount": $totalMoneyPot
+        }
+
+        $MoneyUpdateString = JSON.stringify($MoneyUpdate)
+
+
+
+        $http.put("/api/Family/", $MoneyUpdateString).then(
+            function (response) {
+                //$window.location.reload();
+                console.log("Updated $Pot Balance to",  $totalMoneyPot);
+            },
+            function (response) {
+                console.log("error updating family $Pot");
+            }
+            );
+    }
+
+    $scope.subtractMoneyFromFamily = function () {
+        console.log("Subratct Function found");
+        $CurrentBalance = $("#currentBalance").text();
+        $oldBalance = parseFloat($CurrentBalance);
+        $AmountToSubtract = $scope.DollarAmount;
+        $toSubtract = parseFloat($AmountToSubtract);
+        $totalMoneyPot = $oldBalance - $toSubtract;
+        console.log("total Money Pot", $totalMoneyPot);
+
+        $MoneyUpdate = {
+            "DollarAmount": $totalMoneyPot
+        }
+
+        $MoneyUpdateString = JSON.stringify($MoneyUpdate)
+
+
+
+        $http.put("/api/Family/", $MoneyUpdateString).then(
+            function (response) {
+                //$window.location.reload();
+                console.log("Updated $Pot Balance to", $totalMoneyPot);
+            },
+            function (response) {
+                console.log("error updating family $Pot");
+            }
+            );
+    }
+
+   
 
     $scope.createOrUpdateFamily = function() {
         console.log("found create or update family");
@@ -46,11 +97,11 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
             //update family method
             $http.put("/api/Family/", $familyString).then(
                     function (response) {
-                        $window.location.reload();
+                        //$window.location.reload();
                         console.log("Updated Family");
                     },
                     function (response) {
-                        console.log("error updateding family");
+                        console.log("error updating family");
                     }
                     );
         }
@@ -90,4 +141,18 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
                 }
             );
     }
+
+     $scope.boughtWish = function (id) {
+         console.log("found bought it", id);
+         $http.put(" /api/Wish/ " + id).then(
+            function (response) {
+                //$window.location.reload();
+                console.log("Wish Updated to Bought");
+            },
+                function (response) {
+                    console.log(error);
+                }
+            );
+    }
+
 }]);

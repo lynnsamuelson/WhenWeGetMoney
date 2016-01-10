@@ -43,6 +43,10 @@ namespace WhenWeGetMoney.Controllers
                 }
 
                 ViewBag.Amount = me.DollarAmount;
+
+                List<Wish> boughtWishes = Repo.GetFamilyBoughtWishes(me);
+                ViewBag.Bought = boughtWishes;
+
                 List<Wish> my_wishes = Repo.GetFamilyWishes(me);
                 return View(my_wishes);
 
@@ -72,6 +76,7 @@ namespace WhenWeGetMoney.Controllers
             Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
 
             ViewBag.Amount = me.DollarAmount;
+            ViewBag.Name = me.FamilyName;
             return View();
         }
 
@@ -101,7 +106,10 @@ namespace WhenWeGetMoney.Controllers
 
             ViewBag.Amount = me.DollarAmount;
 
-            return View();
+            List<Wish> boughtWishes = Repo.GetFamilyBoughtWishes(me);
+            ViewBag.Bought = boughtWishes;
+
+            return View(boughtWishes);
         }
 
         public ActionResult wishList()

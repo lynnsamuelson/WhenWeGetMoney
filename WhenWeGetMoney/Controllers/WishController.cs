@@ -62,8 +62,10 @@ namespace WhenWeGetMoney.Controllers
 
         // PUT: api/Wish/5
 
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id)
         {
+            Wish toBuy = Repo.Context.Wishes.FirstOrDefault(u => u.WishId == id);
+            Repo.BoughtWish(toBuy);
         }
 
         // DELETE: api/Wish/5
