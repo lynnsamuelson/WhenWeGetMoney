@@ -97,8 +97,6 @@ namespace WhenWeGetMoney.Controllers
             return View();
         }
 
-
-
         public ActionResult boughtIt()
         {
             string user_id = User.Identity.GetUserId();
@@ -106,6 +104,16 @@ namespace WhenWeGetMoney.Controllers
 
             ViewBag.Amount = me.DollarAmount;
 
+            List<Wish> boughtWishes = Repo.GetFamilyBoughtWishes(me);
+            ViewBag.Bought = boughtWishes;
+
+            return View(boughtWishes);
+        }
+
+        public ActionResult _Bought()
+        {
+            string user_id = User.Identity.GetUserId();
+            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
             List<Wish> boughtWishes = Repo.GetFamilyBoughtWishes(me);
             ViewBag.Bought = boughtWishes;
 
