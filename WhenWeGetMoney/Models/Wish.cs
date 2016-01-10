@@ -25,6 +25,6 @@ namespace WhenWeGetMoney.Models
         public string Picture { get; set; }
         public string WishUrl { get; set; }
         public bool BoughtIt { get; set; }
-
+       
     }
 }

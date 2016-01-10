@@ -2,9 +2,7 @@
 
 app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $http, $window) {
 
-    $scope.boughtWishes = function () {
-        console.log("bought Wishes")
-    }
+  
 
 
     $scope.addMoneyToFamily = function () {
@@ -49,8 +47,6 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
 
         $MoneyUpdateString = JSON.stringify($MoneyUpdate)
 
-
-
         $http.put("/api/Family/", $MoneyUpdateString).then(
             function (response) {
                 //$window.location.reload();
@@ -77,9 +73,6 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
         console.log("Family Obj", $family);
 
         $familyString = JSON.stringify($family)
-
-        
-
 
         if ($familyName[0] == undefined) {
             //create family method
@@ -113,7 +106,6 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
         $wish = {
             "Content": $scope.content,
             "Cost": $scope.cost,
-           
         }
 
         $wishString = JSON.stringify($wish);
@@ -144,15 +136,18 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
 
      $scope.boughtWish = function (id) {
          console.log("found bought it", id);
+
          $http.put(" /api/Wish/ " + id).then(
             function (response) {
-                //$window.location.reload();
+                $window.location.reload();
                 console.log("Wish Updated to Bought");
             },
                 function (response) {
                     console.log(error);
                 }
             );
+
+        
     }
 
 }]);

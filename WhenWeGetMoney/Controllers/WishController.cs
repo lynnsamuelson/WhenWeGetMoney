@@ -61,9 +61,19 @@ namespace WhenWeGetMoney.Controllers
         }
 
         // PUT: api/Wish/5
-
+        //[System.Web.Http.Route("api/Wish/")]
+        //[System.Web.Http.HttpPut]
         public void Put(int id)
         {
+            string user = User.Identity.GetUserId();
+            ApplicationUser real_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user);
+            Family me = Repo.GetAllFamilies().Where(u => u.RealUser.Id == user).SingleOrDefault();
+
+            Wish theWishToUpdate = Repo.Context.Wishes.SingleOrDefault(u => u.WishId == id);
+            decimal dollarAmount = me.DollarAmount - theWishToUpdate.Cost;
+
+            Repo.UpdateFamily(real_user, me, me.FamilyName, dollarAmount);
+
             Wish toBuy = Repo.Context.Wishes.FirstOrDefault(u => u.WishId == id);
             Repo.BoughtWish(toBuy);
         }
