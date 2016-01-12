@@ -16,20 +16,19 @@
 
     <div class="familyProfile">
         <div>
-
-            <div method="post">
-
-                <div >
-                    <input ng-model="FamilyName" id="addFamilyName" placeholder="Family Name" />
-                </div>
-                <div>
-                    <input ng-model="DollarAmount" id="addDollarAmount" placeholder="Savings Amount" />
-                </div>
-
-                <p>
-                    {{content}} {{DollarAmount}}
-                </p>
-                <button ng-click="createOrUpdateFamily()">Save Family</button>
+            <div >
+                <input ng-model="FamilyName" id="addFamilyName" placeholder="Family Name" />
             </div>
-        </div>
-    </div>
+            <div>
+                <input ng-model="DollarAmount" id="addDollarAmount" placeholder="Savings Amount" />
+            </div>
+
+            <p class="contents">
+                {{content}} {{DollarAmount}}
+            </p>
+            <div classes"contents">
+                <button class="saveProfileBtn btn" ng-click="createOrUpdateFamily()">Save Family</button>
+            </div>
+         </div>
+     </div>
+  </div>

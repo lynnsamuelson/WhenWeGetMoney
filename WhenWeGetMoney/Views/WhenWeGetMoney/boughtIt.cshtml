@@ -8,26 +8,25 @@
 <h1>Bought It</h1>
 
 
-<table>
-    <tr>
-        <th class="text-center">Date Added</th>
-        <th class="text-center">Wish</th>
-        <th class="text-center">Cost</th>
-
-    </tr>
-
-    @foreach (var Wish in Model)
-    {
+<div table-center>
+    <table class="myTable">
         <tr>
-            <td class="text-center wishToDelete">@Wish.Date.ToString("MMM dd yy")</td>
-            <td class="text-center wishToDelete">@Wish.Content</td>
-            <td class="text-center wishToDelete">@Wish.Cost</td>
-            @*<td><button ng-click="deleteWish(@Wish.WishId)">Delete</button></td>
-            <td><button ng-click="boughtWish(@Wish.WishId)">Bought It</button></td>*@
+            <th class="text-center">Date Added</th>
+            <th class="text-center">Wish</th>
+            <th class="text-center">Cost</th>
 
         </tr>
-    }
-</table>
+
+        @foreach (var Wish in Model)
+        {
+            <tr>
+                <td class="text-center wishToDelete">@Wish.Date.ToString("MMM dd yy")</td>
+                <td class="text-center wishToDelete">@Wish.Content</td>
+                <td class="text-center wishToDelete">@Wish.Cost</td>
+            </tr>
+        }
+    </table>
+</div>
 
 
 

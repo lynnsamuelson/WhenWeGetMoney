@@ -77,6 +77,9 @@ namespace WhenWeGetMoney.Controllers
 
             ViewBag.Amount = me.DollarAmount;
             ViewBag.Name = me.FamilyName;
+
+            List<Wish> boughtWishes = Repo.GetFamilyBoughtWishes(me);
+            ViewBag.Bought = boughtWishes;
             return View();
         }
 
@@ -94,6 +97,8 @@ namespace WhenWeGetMoney.Controllers
                 ViewBag.Amount = me.DollarAmount;
 
             }
+            List<Wish> boughtWishes = Repo.GetFamilyBoughtWishes(me);
+            ViewBag.Bought = boughtWishes;
             return View();
         }
 

@@ -13,32 +13,9 @@
         <h3>Wish List</h3>
     </div>
 
-    <div class="row">
-        <div class="col-lg-6 col-lg-offset-3">
-            <div class="wish">
-                <div>
-
-                    <div method="post">
-
-                        <div id="addWish">
-                            <input ng-model="content" placeholder="Add Wish" />
-                        </div>
-                        <div id="wishUrl">
-                            <input ng-model="cost" placeholder="Cost" />
-                        </div>
-                        
-                        <p>
-                            {{content}} {{cost}} 
-                        </p>
-                         <button ng-click="createWish()">Save Wish</button>
-                     
-
-                    </div>
-                </div>
-
-              
-                
-                <table>
+    <div class="center">
+            <div class="table-center">  
+                <table class="myTable">
                     <tr>
                         <th class="text-center">Date Added</th>
                         <th class="text-center">Wish</th>
@@ -58,9 +35,8 @@
 
                                     </tr>
                                 }
-                  </table>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
 

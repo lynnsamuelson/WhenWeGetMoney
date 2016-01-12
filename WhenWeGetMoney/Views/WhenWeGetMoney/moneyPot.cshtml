@@ -16,14 +16,18 @@
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
             <div class="MoneyPot">
-                <div id="currentBalance">@ViewBag.Amount</div>
-                <div>
-                    <input ng-model="DollarAmount" id="addDollarAmount" placeholder="Amount" />
+                <div id="currentBalance" class="boughtS">$@ViewBag.Amount</div>
+                <div id="addDollarAmount">
+                    <input ng-model="DollarAmount"  placeholder="Amount" />
                 </div>
-                {{DollarAmount}}
-                <button ng-click="createOrUpdateFamily()">Update Amount</button>
-                <button ng-click="addMoneyToFamily()">Add</button>
-                <button ng-click="subtractMoneyFromFamily()">Subtract</button>
+                <div class="dollarAmount">
+                    {{DollarAmount}}
+                </div>
+                <div class="btn moneyBtns">
+                    <button ng-click="createOrUpdateFamily()">Update Amount</button>
+                    <button ng-click="addMoneyToFamily()">Add</button>
+                    <button ng-click="subtractMoneyFromFamily()">Subtract</button>
+                </div>
             </div>
         </div>
     </div>

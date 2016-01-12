@@ -1061,6 +1061,7 @@
     <Content Include="Views\Shared\_Dollar.cshtml" />
     <Content Include="Views\WhenWeGetMoney\family.cshtml" />
     <Content Include="Views\Shared\_Bought.cshtml" />
+    <Content Include="Views\Shared\_addWish.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

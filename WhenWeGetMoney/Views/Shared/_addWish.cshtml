@@ -1,0 +1,25 @@
+﻿@model IEnumerable<WhenWeGetMoney.Models.Wish>
+
+@using Microsoft.AspNet.Identity
+
+<div ng-controller="Controller">
+
+
+   
+            <div class="addWishDiv">
+                <div>
+                    <div id="addWish">
+                        <input ng-model="content" placeholder="Add Wish" />
+                    </div>
+                    <div id="wishUrl">
+                        <input ng-model="cost" placeholder="Cost" />
+                    </div>
+
+                    <p>
+                        {{content}} {{cost}}
+                    </p>
+                    <button ng-click="createWish()">Save Wish</button>
+                </div>
+            </div>
+  
+</div>
