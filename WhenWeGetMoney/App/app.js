@@ -7,7 +7,9 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
 
     $scope.addMoneyToFamily = function () {
         $CurrentBalance = $("#currentBalance").text();
+        console.log("currentBalance", $CurrentBalance);
         $oldBalance = parseFloat($CurrentBalance);
+        console.log("oldBalance", $oldBalance);
         $AmountToAdd = $scope.DollarAmount;
         $toAdd = parseFloat($AmountToAdd);
         $totalMoneyPot = $oldBalance + $toAdd;
@@ -23,7 +25,7 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
 
         $http.put("/api/Family/", $MoneyUpdateString).then(
             function (response) {
-                //$window.location.reload();
+                $window.location.reload();
                 console.log("Updated $Pot Balance to",  $totalMoneyPot);
             },
             function (response) {
@@ -49,7 +51,7 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
 
         $http.put("/api/Family/", $MoneyUpdateString).then(
             function (response) {
-                //$window.location.reload();
+                $window.location.reload();
                 console.log("Updated $Pot Balance to", $totalMoneyPot);
             },
             function (response) {
@@ -78,7 +80,7 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
             //create family method
             $http.post("/api/Family/", $familyString).then(
                     function (response) {
-                        //$window.location.reload();
+                        $window.location.reload();
                         console.log("Created Family");
                     },
                     function (response) {
@@ -90,7 +92,7 @@ app.controller('Controller', ["$scope", "$http", "$window", function ($scope, $h
             //update family method
             $http.put("/api/Family/", $familyString).then(
                     function (response) {
-                        //$window.location.reload();
+                        $window.location.reload();
                         console.log("Updated Family");
                     },
                     function (response) {
